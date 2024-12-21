@@ -16,7 +16,7 @@ public class Gladiatore{
     private String provenienza;
     private int livello;
     //Costruttore Gladatore
-    public Gladiatore(String nome, String tipo, int epserienza, int puntiSalute, int attacco, int difesa, int velocità, int attaccoSpeciale, String armamenti[], String provenienza, int livello){
+    public Gladiatore(String nome, String tipo, int esperienza, int puntiSalute, int attacco, int difesa, int velocità, int attaccoSpeciale, String armamenti[], String provenienza, int livello){
         this.nome=nome;
         this.tipo=tipo;
         this.esperienza=esperienza;

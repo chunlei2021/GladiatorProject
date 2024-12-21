@@ -11,11 +11,11 @@ public class Gladiatore{
     private int difesa;
     private int velocità;
     private int attaccoSpeciale;
+    private static final int DIM = 10;
     private String armamenti[] = new String[DIM];
-    private static DIM = 10;
     private String provenienza;
     private int livello;
-    
+    //Costruttore Gladatore
     public Gladiatore(String nome, String tipo, int epserienza, int puntiSalute, int attacco, int difesa, int velocità, int attaccoSpeciale, String armamenti[], String provenienza, int livello){
         this.nome=nome;
         this.tipo=tipo;
@@ -29,6 +29,11 @@ public class Gladiatore{
         this.provenienza=provenienza;
         this.livello=livello;
     }
+    //Metodo toString, per stampare tutti gli attributi del gladiatore
+    public String toString(){
+        return "Nome: "+nome+"\nTipo: "+tipo+"\nEsperienza: "+esperienza+"\nPunti Salute: "+puntiSalute+"\nAttacco: "+attacco+"\nDifesa: "+difesa+"\nVelocità: "+velocità+"\nAttacco Speciale: "+attaccoSpeciale+"\nArmamenti: "+Arrays.toString(armamenti)+"\nProvenienza: "+provenienza+"\nLivello: "+livello;
+    }
+    //Metodi getter
     public String getNome(){
         return nome;
     }
@@ -36,10 +41,13 @@ public class Gladiatore{
         return tipo;
     }
     public int getEsperienza(){
-        return epserienza;
+        return esperienza;
     }
     public int getPuntiSalute(){
         return puntiSalute;
+    }
+    public int getAttacco(){
+        return attacco;
     }
     public int getDifesa(){
         return difesa;
@@ -52,6 +60,46 @@ public class Gladiatore{
     }
     public String getArmamenti(){
         return Arrays.toString(armamenti);
+    }
+    public String getProvenienza(){
+        return provenienza;
+    }
+    public int getLivello(){
+        return livello;
+    }
+    //Metodi setter
+    public void setNome(String nome){
+        this.nome=nome;
+    }
+    public void setTipo(String tipo){
+        this.tipo=tipo;
+    }
+    public void setEsperienza(int esperienza){
+        this.esperienza=esperienza;
+    }
+    public void setPuntiSalute(int puntiSalute){
+        this.puntiSalute=puntiSalute;
+    }
+    public void setAttacco(int attacco){
+        this.attacco=attacco;
+    }
+    public void setDifesa(int difesa){
+        this.difesa=difesa;
+    }
+    public void setVelocità(int velocità){
+        this.velocità=velocità;
+    }
+    public void setAttaccoSpeciale(int attaccoSpeciale){
+        this.attaccoSpeciale=attaccoSpeciale;
+    }
+    public void setArmamenti(String armamenti[]){
+        this.armamenti=armamenti;
+    }
+    public void setProvenienza(String provenienza){
+        this.provenienza=provenienza;
+    }
+    public void setLivello(int livello){
+        this.livello=livello;
     }
     
 }

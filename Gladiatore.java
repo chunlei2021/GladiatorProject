@@ -31,7 +31,14 @@ public class Gladiatore{
     }
     //Metodo toString, per stampare tutti gli attributi del gladiatore
     public String toString(){
-        return "Nome: "+nome+"\nTipo: "+tipo+"\nEsperienza: "+esperienza+"\nPunti Salute: "+puntiSalute+"\nAttacco: "+attacco+"\nDifesa: "+difesa+"\nVelocità: "+velocità+"\nAttacco Speciale: "+attaccoSpeciale+"\nArmamenti: "+Arrays.toString(armamenti)+"\nProvenienza: "+provenienza+"\nLivello: "+livello;
+        return "Nome: "+nome+"\nTipo: "+tipo+"\nEsperienza: "+esperienza+"\nPunti Salute: "+puntiSalute+"\nAttacco: "+attacco+"\nDifesa: "+difesa+"\nVelocità: "+velocità+"\nAttacco Speciale: "+attaccoSpeciale+"\nArmamenti: "+Arrays.toString(armamenti)+"\nProvenienza: "+provenienza+"\nLivello: "+livello+"\nMedia: "+media()+"\nTotale: "+totale();
+        
+    }
+    public float media(){
+        return (esperienza+puntiSalute+attacco+difesa+velocità+attaccoSpeciale)/6;
+    }
+    public int totale(){
+        return (esperienza+puntiSalute+attacco+difesa+velocità+attaccoSpeciale); 
     }
     //Metodi getter
     public String getNome(){

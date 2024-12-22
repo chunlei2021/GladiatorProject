@@ -19,9 +19,11 @@ public class Main{
         int difesa = random.nextInt(31)+40;
         int velocità = random.nextInt(31)+40;
         int attaccoSpeciale = random.nextInt(31)+40;
-        System.out.println(n1);
+        String armamenti[] = {"Spada","Coltello"};
         
-        Gladiatore g1 = new Gladiatore ("Marco", "Attacante",esperienza,puntiSalute,attacco,difesa,velocità,attaccoSpeciale,{"Spada","Coltello"},"Roma",0)
+        Gladiatore g1 = new Gladiatore ("Marco", "Attacante",esperienza,puntiSalute,attacco,difesa,velocità,attaccoSpeciale,armamenti,"Roma",0);
+        System.out.println("g1: \n"+g1);
         
     }
 }
+ 

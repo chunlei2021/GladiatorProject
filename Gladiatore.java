@@ -120,4 +120,20 @@ public class Gladiatore{
     
     //Metodo attacco, per calcolare il danno inflitto dal gladiatore
     
+    public void combattimento(Gladiatore nemico){
+        Random random = new Random();
+        
+        int dato = random.nextInt(1)+20;
+        int dato2 = random.nextInt(1)+20; 
+        if(dato>dato2){
+            
+        }
+    }
+    public float danno(Gladiatore nemico){
+        Random random = new Random();
+        float rand = random.nextFloat(0.85)+1; 
+        float potenza = 20; 
+    }
+    
+    
 }

@@ -143,7 +143,7 @@ public class Gladiatore{
         Random random = new Random();
         float rand = 0.85f + random.nextFloat() * (1f - 0.85f);
         float potenza = 20; 
-        float danno = ((((2*(float)this.livello)/5) + (2*potenza*((float)this.attacco/nemico.getDifesa())))/50) * rand;
+        float danno = ((((2*(float)this.livello)/5) + (2*potenza*((float)this.attacco/nemico.getDifesa())))/50) * rand; 
         System.out.println("[Danno inflitto: "+danno + "]");
         return danno;
     }

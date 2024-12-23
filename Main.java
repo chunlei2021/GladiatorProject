@@ -35,9 +35,23 @@ public class Main{
         System.out.println("Inserisci la provenienza: ");
         provenienza = input.nextLine();
         //Il secondo gladiatore
-        Gladiatore g2 = new Gladiatore(nome, tipo, armamenti, provenienza);
-        System.out.println("\nSecondo Gladiatore: \n" + g2);
+        Gladiatore avversario = new Gladiatore(nome, tipo, armamenti, provenienza);
+        System.out.println("\nSecondo Gladiatore: \n" + avversario);
+
+        System.out.println("\n--- INIZIA LA BATTAGLIA! ---");
+        while(g1.getPuntiSalute() > 0 && avversario.getPuntiSalute() > 0){
+            g1.combattimento(avversario);
+
+            if(g1.getPuntiSalute() <= 0){
+                System.out.println("Il Gladiatore " + g1.getNome() + " è morto!");
+                break;
+            } else if(avversario.getPuntiSalute() <= 0){
+                System.out.println("Il Gladiatore " + avversario.getNome() + " è morto!");
+                break;
+            }
+        }
         
+        System.out.println("--- FINE BATTAGLIA! ---");
         //System.out.println("Vuoi continuare a giocare? [s/n]");
         input.close();
     }

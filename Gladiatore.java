@@ -2,6 +2,8 @@
 [Realizzato da Camozzo e Petrini] 
 */
 import java.util.Arrays;
+import java.util.Random;
+
 public class Gladiatore{
     private String nome;
     private String tipo;
@@ -16,18 +18,23 @@ public class Gladiatore{
     private String provenienza;
     private int livello;
     //Costruttore Gladatore
-    public Gladiatore(String nome, String tipo, int esperienza, int puntiSalute, int attacco, int difesa, int velocità, int attaccoSpeciale, String armamenti[], String provenienza, int livello){
+    public Gladiatore(String nome, String tipo, String armamenti[], String provenienza){
         this.nome=nome;
         this.tipo=tipo;
-        this.esperienza=esperienza;
-        this.puntiSalute=puntiSalute;
-        this.attacco=attacco;
-        this.difesa=difesa;
-        this.velocità=velocità;
-        this.attaccoSpeciale=attaccoSpeciale;
+        this.esperienza=0;
+        this.puntiSalute=random();
+        this.attacco=random();
+        this.difesa=random();
+        this.velocità=random();
+        this.attaccoSpeciale=random();
         this.armamenti=armamenti;
         this.provenienza=provenienza;
-        this.livello=livello;
+        this.livello=1;
+    }
+    //Random numeri per le caratteristiche del gladiatore
+    public int random(){
+        Random random = new Random();
+        return random.nextInt(31)+40;
     }
     //Metodo media, per calcolare la media dei valori degli attributi del gladiatore
     public float media(){
@@ -39,7 +46,7 @@ public class Gladiatore{
     }
     //Metodo toString, per stampare tutti gli attributi del gladiatore
     public String toString(){
-        return "Nome: "+nome+"\nTipo: "+tipo+"\nEsperienza: "+esperienza+"\nPunti Salute: "+puntiSalute+"\nAttacco: "+attacco+"\nDifesa: "+difesa+"\nVelocità: "+velocità+"\nAttacco Speciale: "+attaccoSpeciale+"\nArmamenti: "+Arrays.toString(armamenti)+"\nProvenienza: "+provenienza+"\nLivello: "+livello+"\nMedia: "+media()+"\nTotale: "+totale();
+        return "Nome: "+nome+"\nTipo: "+tipo+"\nEsperienza: "+esperienza+" XP\nPunti Salute: "+puntiSalute+"HP \nAttacco: "+attacco+"\nDifesa: "+difesa+"\nVelocità: "+velocità+"\nAttacco Speciale: "+attaccoSpeciale+"\nArmamenti: "+Arrays.toString(armamenti)+"\nProvenienza: "+provenienza+"\nLivello: "+livello+"\nMedia: "+media()+"\nTotale: "+totale();
         
     }
     //Metodi getter
@@ -110,5 +117,7 @@ public class Gladiatore{
     public void setLivello(int livello){
         this.livello=livello;
     }
+    
+    //Metodo attacco, per calcolare il danno inflitto dal gladiatore
     
 }

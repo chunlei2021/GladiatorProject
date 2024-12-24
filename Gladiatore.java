@@ -152,5 +152,5 @@ public class Gladiatore{
         danno *= rand;
         return danno;
     }
-    
+    //Implemntare altri metodi, continuare a migliorare i metodi già implementati
 }

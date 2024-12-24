@@ -38,6 +38,7 @@ public class Main{
         System.out.println("\nSecondo Gladiatore: \n" + avversario);
 
         System.out.println("\n--- INIZIA LA BATTAGLIA! ---\n");
+        //Inizio vero proprio della battaglia
         while(g1.getPuntiSalute() > 0 && avversario.getPuntiSalute() > 0){
             g1.combattimento(avversario);
 
@@ -56,9 +57,9 @@ public class Main{
                 break;
             }
         }
-        
+        //Continuare a scrivere il codice di questo blocco graffo per la battaglia
         System.out.println("\n--- FINE BATTAGLIA! ---");
-        //System.out.println("Vuoi continuare a giocare? [s/n]");
+        
         input.close();
     }
 }

@@ -1,0 +1,13 @@
+xp = this.getLivello() / 1;
+nemico.setEsperienza(nemico.getEsperienza() + xp);
+System.out.println("Ha guadagnato "+xp+" XP");
+
+xp = nemico.getLivello() / 1;
+this.setEsperienza(this.getEsperienza() + xp);
+System.out.println("Ha guadagnato "+xp+" XP");
+
+xp = g1.getLivello() / 1;
+avversario.setEsperienza(avversario.getEsperienza() + xp);
+
+xp = avversario.getLivello() / 1;
+g1.setEsperienza(g1.getEsperienza() + xp);*/

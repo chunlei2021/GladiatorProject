@@ -122,29 +122,34 @@ public class Gladiatore{
     public void combattimento(Gladiatore nemico){
         Random random = new Random();
         int[] dato = new int[2];
-        dato[0] = random.nextInt(1) + 20;
-        dato[1] = random.nextInt(1) + 20;
+        dato[0] = random.nextInt(20) + 1;
+        dato[1] = random.nextInt(20) + 1;
+        float danno;
+        //float nuovaSalute;
         if(dato[0]>dato[1]){
-            float danno = this.danno(nemico);
-            float nuovaSalute = nemico.getPuntiSalute() - danno;
-            nemico.setPuntiSalute(nuovaSalute);
-            System.out.println("Il gladiatore "+this.getNome()+" ha inflitto un danno [" + danno + "] al gladiatore "+nemico.getNome());
+            System.out.println("[ Risultato del lancio del dado ] Il gladiatore \""+this.getNome()+"\" gli è uscito + "+dato[0]+" e il gladiatore \""+nemico.getNome()+"\" gli è uscito + "+dato[1]);
+            danno = this.danno(nemico);
+            nemico.setPuntiSalute(nemico.getPuntiSalute() - danno);
+            System.out.println("Il gladiatore \""+this.getNome()+"\" ha inflitto un danno [" + danno + "] al gladiatore \""+nemico.getNome()+ "\"");
             System.out.println("La salute del gladiatore nemico "+nemico.getNome()+" è: "+nemico.getPuntiSalute());
+            System.out.println();
         } else {
-            float danno = nemico.danno(this);
-            float nuovaSalute = nemico.getPuntiSalute() - danno;
-            this.setPuntiSalute(nuovaSalute);
-            System.out.println("Il gladiatore nemico "+nemico.getNome()+" ha inflitto un danno [" + danno + "] al gladiatore "+this.getNome());
-            System.out.println("La salute del gladiatore "+this.getNome()+" è: "+this.getPuntiSalute());
+            System.out.println("Il gladiatore \""+this.getNome()+"\" gli è uscito + "+dato[0]+" e il gladiatore \""+nemico.getNome()+"\" gli è uscito + "+dato[1]);
+            danno = nemico.danno(this);
+            this.setPuntiSalute(this.getPuntiSalute() - danno);
+            System.out.println("Il gladiatore nemico \""+nemico.getNome()+"\" ha inflitto un danno [" + danno + "] al gladiatore \""+this.getNome() + "\"");
+            System.out.println("La salute del gladiatore \""+this.getNome()+"\" è: "+this.getPuntiSalute());
+            System.out.println();
         }
     }
     //Metodo danno, per calcolare il danno inflitto dal gladiatore
     public float danno(Gladiatore nemico){
         Random random = new Random();
-        float rand = 0.85f + random.nextFloat() * (1f - 0.85f);
+        float rand = random.nextFloat() * 0.15f + 0.85f;
         float potenza = 20; 
-        float danno = ((((2*(float)this.livello)/5) + (2*potenza*((float)this.attacco/nemico.getDifesa())))/50) * rand; 
-        System.out.println("[Danno inflitto: "+danno + "]");
+        float danno = (2*livello/5) + (2*potenza*this.getAttacco()/nemico.getDifesa())+2;
+        danno /= 5;
+        danno *= rand;
         return danno;
     }
     

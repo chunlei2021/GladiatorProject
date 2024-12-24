@@ -2,7 +2,6 @@
 [Realizzato da Camozzo e Petrini] 
 */
 
-//import java.util.Random;
 import java.util.Scanner;
 //import java.util.Random;
 //import java.util.Arrays;
@@ -38,20 +37,27 @@ public class Main{
         Gladiatore avversario = new Gladiatore(nome, tipo, armamenti, provenienza);
         System.out.println("\nSecondo Gladiatore: \n" + avversario);
 
-        System.out.println("\n--- INIZIA LA BATTAGLIA! ---");
+        System.out.println("\n--- INIZIA LA BATTAGLIA! ---\n");
         while(g1.getPuntiSalute() > 0 && avversario.getPuntiSalute() > 0){
             g1.combattimento(avversario);
 
+            int xp;
             if(g1.getPuntiSalute() <= 0){
-                System.out.println("Il Gladiatore " + g1.getNome() + " è morto!");
+                System.out.println("Il Gladiatore \"" + g1.getNome() + "\" è morto!");
+                xp = g1.getLivello() / 1;
+                avversario.setEsperienza(avversario.getEsperienza() + xp);
+                System.out.println("Il Gladiatore \"" + avversario.getNome() + "\" ha guadagnato " + avversario.getEsperienza() + " XP!");
                 break;
             } else if(avversario.getPuntiSalute() <= 0){
-                System.out.println("Il Gladiatore " + avversario.getNome() + " è morto!");
+                System.out.println("Il Gladiatore \"" + avversario.getNome() + "\" è morto!");
+                xp = avversario.getLivello() / 1;
+                g1.setEsperienza(g1.getEsperienza() + xp);
+                System.out.println("Il Gladiatore \"" + g1.getNome() + "\" ha guadagnato " + g1.getEsperienza() + " XP!");
                 break;
             }
         }
         
-        System.out.println("--- FINE BATTAGLIA! ---");
+        System.out.println("\n--- FINE BATTAGLIA! ---");
         //System.out.println("Vuoi continuare a giocare? [s/n]");
         input.close();
     }

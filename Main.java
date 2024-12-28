@@ -39,22 +39,36 @@ public class Main{
 
         System.out.println("\n--- INIZIA LA BATTAGLIA! ---\n");
         //Inizio vero proprio della battaglia
-        while(g1.getPuntiSalute() > 0 && avversario.getPuntiSalute() > 0){
+        String risposta = "si";
+        boolean risp = true;
+        while(risp){
             g1.combattimento(avversario);
 
-            int xp;
             if(g1.getPuntiSalute() <= 0){
                 System.out.println("Il Gladiatore \"" + g1.getNome() + "\" è morto!");
-                System.out.println("Il Gladiatore \"" + avversario.getNome() + "\" ha guadagnato " + avversario.getEsperienza() + " XP!");
-                System.out.println("Il Gladiatore \"" + g1.getNome() + "\" ha guadagnato " + g1.getEsperienza() + " XP!");
                 break;
             } else if(avversario.getPuntiSalute() <= 0){
                 System.out.println("Il Gladiatore \"" + avversario.getNome() + "\" è morto!");
-                System.out.println("Il Gladiatore \"" + g1.getNome() + "\" ha guadagnato " + g1.getEsperienza() + " XP!");
-                System.out.println("Il Gladiatore \"" + avversario.getNome() + "\" ha guadagnato " + avversario.getEsperienza() + " XP!");
                 break;
             }
+
+            System.out.println("Vuoi continuare la battaglia? (si/no)");
+            risposta = input.nextLine();
+            risposta = risposta.toLowerCase();
+            if(risposta.equals("si")){
+                System.out.println("Continua la battaglia!");
+            } else if(risposta.equals("no")){
+                System.out.println("Fine della battaglia!");
+                risp = false;
+                if(g1.getPuntiSalute() > avversario.getPuntiSalute()){
+                    System.out.println("Il Gladiatore \"" + g1.getNome() + "\" ha vinto la battaglia! (HP rimasti: " + g1.getPuntiSalute() + ")");
+                } else {
+                    System.out.println("Il Gladiatore \"" + avversario.getNome() + "\" ha vinto la battaglia! (HP rimasti: " + avversario.getPuntiSalute() + ")");
+                }
+            } 
         }
+        System.out.println("Il Gladiatore \"" + avversario.getNome() + "\" ha guadagnato " + avversario.getEsperienza() + " XP!");
+        System.out.println("Il Gladiatore \"" + g1.getNome() + "\" ha guadagnato " + g1.getEsperienza() + " XP!");
         //Continuare a scrivere il codice di questo blocco graffo per la battaglia
         System.out.println("\n--- FINE BATTAGLIA! ---");
         

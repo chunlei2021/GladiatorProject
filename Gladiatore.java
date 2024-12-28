@@ -134,9 +134,9 @@ public class Gladiatore{
             int xp=0;
             if(danno<9){
                 xp+=5;
-                }
+            }
             else if(danno>=9){
-                 xp+=5+10;
+                xp+=5+10;
             }
             this.setEsperienza(this.getEsperienza() + xp);
             System.out.println("Il gladiatore \""+this.getNome()+"\" ha guadagnato "+this.getEsperienza());

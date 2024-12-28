@@ -131,12 +131,30 @@ public class Gladiatore{
             danno = this.danno(nemico);
             nemico.setPuntiSalute(nemico.getPuntiSalute() - danno);
             System.out.println("Il gladiatore \""+this.getNome()+"\" ha inflitto un danno [" + danno + "] al gladiatore \""+nemico.getNome()+ "\"");
+            int xp=0;
+            if(danno<9){
+                xp+=5;
+                }
+            else if(danno>=9){
+                 xp+=5+10;
+            }
+            this.setEsperienza(this.getEsperienza() + xp);
+            System.out.println("Il gladiatore \""+this.getNome()+"\" ha guadagnato "+this.getEsperienza());
             System.out.println("La salute del gladiatore nemico "+nemico.getNome()+" è: "+nemico.getPuntiSalute());
             System.out.println();
         } else {
             System.out.println("Il gladiatore \""+this.getNome()+"\" gli è uscito + "+dato[0]+" e il gladiatore \""+nemico.getNome()+"\" gli è uscito + "+dato[1]);
             danno = nemico.danno(this);
             this.setPuntiSalute(this.getPuntiSalute() - danno);
+            int xp1=0;
+            if(danno<9){
+                xp1+=5;
+                }
+            else if(danno>=9){
+                 xp1+=5+10;
+            }
+            nemico.setEsperienza(nemico.getEsperienza() + xp1);
+            System.out.println("Il gladiatore \""+nemico.getNome()+"\" ha guadagnato "+nemico.getEsperienza());
             System.out.println("Il gladiatore nemico \""+nemico.getNome()+"\" ha inflitto un danno [" + danno + "] al gladiatore \""+this.getNome() + "\"");
             System.out.println("La salute del gladiatore \""+this.getNome()+"\" è: "+this.getPuntiSalute());
             System.out.println();

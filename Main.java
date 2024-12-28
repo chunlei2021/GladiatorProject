@@ -45,15 +45,13 @@ public class Main{
             int xp;
             if(g1.getPuntiSalute() <= 0){
                 System.out.println("Il Gladiatore \"" + g1.getNome() + "\" è morto!");
-                xp = g1.getLivello() / 1;
-                avversario.setEsperienza(avversario.getEsperienza() + xp);
                 System.out.println("Il Gladiatore \"" + avversario.getNome() + "\" ha guadagnato " + avversario.getEsperienza() + " XP!");
+                System.out.println("Il Gladiatore \"" + g1.getNome() + "\" ha guadagnato " + g1.getEsperienza() + " XP!");
                 break;
             } else if(avversario.getPuntiSalute() <= 0){
                 System.out.println("Il Gladiatore \"" + avversario.getNome() + "\" è morto!");
-                xp = avversario.getLivello() / 1;
-                g1.setEsperienza(g1.getEsperienza() + xp);
                 System.out.println("Il Gladiatore \"" + g1.getNome() + "\" ha guadagnato " + g1.getEsperienza() + " XP!");
+                System.out.println("Il Gladiatore \"" + avversario.getNome() + "\" ha guadagnato " + avversario.getEsperienza() + " XP!");
                 break;
             }
         }

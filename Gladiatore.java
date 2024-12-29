@@ -117,7 +117,8 @@ public class Gladiatore{
     public void setLivello(int livello){
         this.livello=livello;
     }
-    
+    static final String red = "\u001B[31m";
+    static final String green = "\u001B[32m";
     //Metodo combattimento
     public void combattimento(Gladiatore nemico){
         Random random = new Random();
@@ -127,7 +128,7 @@ public class Gladiatore{
         float danno;
         //float nuovaSalute;
         if(dato[0]>dato[1]){
-            System.out.println("[ Risultato del lancio del dado ] Il gladiatore \""+this.getNome()+"\" gli è uscito + "+dato[0]+" e il gladiatore \""+nemico.getNome()+"\" gli è uscito + "+dato[1]);
+            System.out.println("[ Risultato del lancio del dado ] Al gladiatore \""+this.getNome()+"\" gli è uscito "+dato[0]+" e al gladiatore \""+nemico.getNome()+"\" gli è uscito "+dato[1]);
             danno = this.danno(nemico);
             nemico.setPuntiSalute(nemico.getPuntiSalute() - danno);
             int xp=0;
@@ -143,7 +144,7 @@ public class Gladiatore{
             System.out.println("La salute del gladiatore nemico "+nemico.getNome()+" è: "+nemico.getPuntiSalute());
             System.out.println();
         } else {
-            System.out.println("Il gladiatore \""+this.getNome()+"\" gli è uscito + "+dato[0]+" e il gladiatore \""+nemico.getNome()+"\" gli è uscito + "+dato[1]);
+            System.out.println("[ Risultato del lancio del dado ] Al gladiatore \""+this.getNome()+"\" gli è uscito "+dato[0]+" e al gladiatore \""+nemico.getNome()+"\" gli è uscito "+dato[1]);
             danno = nemico.danno(this);
             this.setPuntiSalute(this.getPuntiSalute() - danno);
             int xp1=0;

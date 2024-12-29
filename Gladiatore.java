@@ -142,7 +142,7 @@ public class Gladiatore{
             System.out.println("Il gladiatore \""+this.getNome()+"\" ha inflitto un danno [" + danno + "] al gladiatore \""+nemico.getNome()+ "\"");
             System.out.println("Il gladiatore \""+this.getNome()+"\" ha guadagnato "+this.getEsperienza() + "XP");
             System.out.println("La salute del gladiatore nemico "+nemico.getNome()+" è: "+nemico.getPuntiSalute());
-            System.out.println();
+            System.out.println(); // Manca il controattacco del gladiatore nemico
         } else {
             System.out.println("[ Risultato del lancio del dado ] Al gladiatore \""+this.getNome()+"\" gli è uscito "+dato[0]+" e al gladiatore \""+nemico.getNome()+"\" gli è uscito "+dato[1]);
             danno = nemico.danno(this);
@@ -158,8 +158,8 @@ public class Gladiatore{
             System.out.println("Il gladiatore \""+nemico.getNome()+"\" ha guadagnato "+nemico.getEsperienza() + "XP");
             System.out.println("Il gladiatore nemico \""+nemico.getNome()+"\" ha inflitto un danno [" + danno + "] al gladiatore \""+this.getNome() + "\"");
             System.out.println("La salute del gladiatore \""+this.getNome()+"\" è: "+this.getPuntiSalute());
-            System.out.println();
-        }
+            System.out.println(); // Manca il controattacco del gladiatore
+        } // Manca la difesa da implementare
     }
     //Metodo danno, per calcolare il danno inflitto dal gladiatore
     public float danno(Gladiatore nemico){

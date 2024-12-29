@@ -1,5 +1,5 @@
 Bisogna automizzare la generazione del gladiatore nemico, cioè i nomi, la provenienza... devono essere generati automaticamente.
-Poi una volta creato array di oggetti stamparli con un for.
+Poi una volta creato array di oggetti stamparli con un for. Implementare la difesa e attacco speciale. Auutomentare il livello in base agli xp.
 Poi migliorare ulteriormente il codice. 
 
 Una volta finito la pogrammazione, modifcare il diagramma UML

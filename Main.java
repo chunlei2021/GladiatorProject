@@ -20,7 +20,7 @@ public class Main{
         System.out.println(blue + "=====================================");
         System.out.println(" Benvenuto nel gioco dei Gladiatori!");
         System.out.println("=====================================\n" + reset);
-
+        /* Per favore non creare danni al codice, cerca di fare bene grazie */
         String armamenti[] = {"Spada","Coltello"};
         System.out.println("Inserisci il nome: ");
         String nome = input.nextLine();

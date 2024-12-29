@@ -51,10 +51,10 @@ public class Main{
             g[0].combattimento(g[1]);
 
             if(g[0].getPuntiSalute() <= 0){
-                System.out.println(red + "Il Gladiatore \"" + g[0].getNome() + "\" ha perso!" + reset);
+                System.out.println(red + "Il Gladiatore \"" + g[0].getNome() + "\" ha perso!" + reset); // Stampare gli HP rimasti, e stampare che l'altro gadiatore ha vinto
                 break;
             } else if(g[1].getPuntiSalute() <= 0){
-                System.out.println(green + "Il Gladiatore \"" + g[1].getNome() + "\" ha morto!" + reset);
+                System.out.println(green + "Il Gladiatore \"" + g[1].getNome() + "\" ha morto!" + reset); // Stampare gli HP rimasti, e stampare che l'altro gladiatore ha vinto
                 break;
             }
 

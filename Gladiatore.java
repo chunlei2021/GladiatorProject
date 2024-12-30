@@ -119,6 +119,46 @@ public class Gladiatore{
     }
     static final String red = "\u001B[31m";
     static final String green = "\u001B[32m";
+    public String personaggio(){
+        System.out.println("Inserisci il tipo del Gladiatore: ");
+        System.out.println("Traex [scudo piccolo, pugnale, lanci]");
+        System.out.println("Murmillo [scudo romano, pugnale]");
+        System.out.println("Retiarius [una rete, un tridente, pugnale]");
+        System.out.println("Secutor [scudo arotondato, pugnale]");
+        System.out.println("Provocator [scudo rettangolare, scudo rettangolare]");
+        Scanner dati = new Scanner(System.in);
+        String personaggio;
+        boolean risp = true;
+        do{
+            personaggio = dati.nextLine();
+            
+            switch(personaggio){
+                case "traex":
+                    return personaggio;
+                    break;
+                case "Murmillo":
+                    return personaggio;
+                    break;
+                
+                case "Retiarius":
+                    return personaggio;
+                    break;
+                
+                case "Secutor":
+                    return personaggio;
+                    break;
+                
+                case "Provocator":
+                    return personaggio;
+                    break;
+                    
+                default:
+                    System.out.println("Personaggio non trovato, reinseriscilo");
+                   
+            }
+            
+        }while(risp);
+    }
     //Metodo combattimento
     public void combattimento(Gladiatore nemico){
         Random random = new Random();

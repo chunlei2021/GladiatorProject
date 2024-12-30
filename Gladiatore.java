@@ -3,6 +3,7 @@
 */
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Gladiatore{
     private String nome;
@@ -18,16 +19,14 @@ public class Gladiatore{
     private String provenienza;
     private int livello;
     //Costruttore Gladatore
-    public Gladiatore(String nome, String tipo, String armamenti[], String provenienza){
+    public Gladiatore(String nome, String provenienza){
         this.nome=nome;
-        this.tipo=tipo;
         this.esperienza=0;
         this.puntiSalute=random();
         this.attacco=random();
         this.difesa=random();
         this.velocità=random();
         this.attaccoSpeciale=random();
-        this.armamenti=armamenti;
         this.provenienza=provenienza;
         this.livello=1;
     }
@@ -119,45 +118,144 @@ public class Gladiatore{
     }
     static final String red = "\u001B[31m";
     static final String green = "\u001B[32m";
-    public String personaggio(){
-        System.out.println("Inserisci il tipo del Gladiatore: ");
-        System.out.println("Traex [scudo piccolo, pugnale, lanci]");
-        System.out.println("Murmillo [scudo romano, pugnale]");
-        System.out.println("Retiarius [una rete, un tridente, pugnale]");
-        System.out.println("Secutor [scudo arotondato, pugnale]");
-        System.out.println("Provocator [scudo rettangolare, scudo rettangolare]");
+    static final String blue = "\u001B[34m";
+    static final String reset = "\u001B[0m";
+    //Metodo configTipo, per configurare il tipo del gladiatore
+    public String configTipo(){
+        System.out.println(blue + "Inserisci il tipo del Gladiatore: " + reset);
+        System.out.println("1. Traex [scudo piccolo, pugnale, lanci]");
+        System.out.println("2. Murmillo [scudo romano, pugnale]");
+        System.out.println("3. Retiarius [una rete, un tridente, pugnale]");
+        System.out.println("4. Secutor [scudo arotondato, pugnale]");
+        System.out.println("5. Provocator [scudo rettangolare, pungale]");
         Scanner dati = new Scanner(System.in);
         String personaggio;
         boolean risp = true;
         do{
             personaggio = dati.nextLine();
+            personaggio = personaggio.toLowerCase();
             
             switch(personaggio){
                 case "traex":
+                    personaggio = "Traex";
                     return personaggio;
-                    break;
-                case "Murmillo":
+
+                case "murmillo":
+                    personaggio = "Murmillo";
+                    return personaggio; 
+
+                case "retiarius":
+                    personaggio = "Retiarius";
+                    return personaggio;    
+
+                case "secutor":
+                    personaggio = "Secutor";
                     return personaggio;
-                    break;
                 
-                case "Retiarius":
+                case "provocator":
+                    personaggio = "Provocator";
                     return personaggio;
-                    break;
-                
-                case "Secutor":
-                    return personaggio;
-                    break;
-                
-                case "Provocator":
-                    return personaggio;
-                    break;
-                    
+    
                 default:
-                    System.out.println("Personaggio non trovato, reinseriscilo");
-                   
+                    System.out.println("Personaggio non trovato, reinseriscilo");        
             }
             
         }while(risp);
+        dati.close();
+        return personaggio;
+    }
+    //Metodo configAutoTipo, per configurare il tipo del gladiatore in modo automatico
+    public String configAutoTipo(){
+        Random random = new Random();
+        int num = random.nextInt(5);
+        String type = "";
+        switch(num){
+            case 0:
+                type = "Traex";
+                break;
+            case 1:
+                type = "Murmillo";
+                break;
+            case 2:
+                type = "Retiarius";
+                break;
+            case 3:
+                type = "Secutor";
+                break;
+            case 4:
+                type = "Provocator";
+                break;
+            default:
+                System.out.println("Tipo non trovato");
+        }
+        return type;
+    }
+    //Metodo configArmamenti, per configurare gli armamenti del gladiatore
+    public String[] configArmamenti(){
+        String [] armamenti = new String[DIM];
+        String tipo = this.getTipo();
+        switch(tipo){
+            case "Traex":
+                armamenti = new String[]{"scudo piccolo", "pugnale", "lanci"};
+                break;
+            case "Murmillo":
+                armamenti = new String[]{"scudo romano", "pugnale"};
+                break;
+            case "Retiarius":
+                armamenti = new String[]{"una rete", "un tridente", "pugnale"};
+                break;
+            case "Secutor":
+                armamenti = new String[]{"scudo arotondato", "pugnale"};
+                break;
+            case "Provocator":
+                armamenti = new String[]{"scudo rettangolare", "pungale"};
+                break;
+            default:
+                System.out.println("Tipo non trovato");            
+        }
+        return armamenti;
+
+    } 
+    public void listaNome(){
+        System.out.println("Lista dei nomi possibili: ");
+        System.out.println("1. Cicerone");
+        System.out.println("2. Seneca");
+        System.out.println("3. Marziale");
+        System.out.println("4. Valerio Massimo");
+        System.out.println("5. Spartaco");
+        System.out.println("6. Flamma");
+        System.out.println("7. Oppure inserire un altro nome");
+    }
+    //Metodo configurare il nome del gladiatore
+    public String configNome(Gladiatore nemico){
+        String nome;
+        Random random = new Random();
+        do{
+            int num = random.nextInt(4);
+            switch(num) {
+                case 0: 
+                    nome = "Cicerone";
+                    break;
+                case 1:
+                    nome = "Seneca";
+                    break;
+                case 2:
+                    nome = "Marziale";
+                    break;
+                case 3:
+                    nome = "Valerio Massimo";
+                    break;
+                case 4:
+                    nome = "Spartaco";
+                    break;
+                case 5:
+                    nome = "Flamma";
+                    break;
+                default:
+                    nome = "Nessun nome";
+            }
+        }while(nome.equals(nemico.getNome()));
+        return nome;
     }
     //Metodo combattimento
     public void combattimento(Gladiatore nemico){
@@ -168,7 +266,7 @@ public class Gladiatore{
         float danno;
         //float nuovaSalute;
         if(dato[0]>dato[1]){
-            System.out.println("[ Risultato del lancio del dado ] Al gladiatore \""+this.getNome()+"\" gli è uscito "+dato[0]+" e al gladiatore \""+nemico.getNome()+"\" gli è uscito "+dato[1]);
+            System.out.println("[ Risultato del lancio del dado ] Al tuo gladiatore \""+this.getNome()+"\" gli è uscito "+dato[0]+" e al gladiatore \""+nemico.getNome()+"\" gli è uscito "+dato[1]);
             danno = this.danno(nemico);
             nemico.setPuntiSalute(nemico.getPuntiSalute() - danno);
             int xp=0;
@@ -179,12 +277,12 @@ public class Gladiatore{
                 xp+=5+10;
             }
             this.setEsperienza(this.getEsperienza() + xp);
-            System.out.println("Il gladiatore \""+this.getNome()+"\" ha inflitto un danno [" + danno + "] al gladiatore \""+nemico.getNome()+ "\"");
-            System.out.println("Il gladiatore \""+this.getNome()+"\" ha guadagnato "+this.getEsperienza() + "XP");
-            System.out.println("La salute del gladiatore nemico "+nemico.getNome()+" è: "+nemico.getPuntiSalute());
-            System.out.println(); // Manca il controattacco del gladiatore nemico
+            System.out.println("Il tuo gladiatore \""+this.getNome()+"\" ha inflitto un danno [" + danno + "] al gladiatore \""+nemico.getNome()+ "\"");
+            System.out.println("Il tuo gladiatore \""+this.getNome()+"\" ha guadagnato "+this.getEsperienza() + "XP");
+            System.out.println("La salute del gladiatore nemico "+nemico.getNome()+" è: "+nemico.getPuntiSalute() + "HP");
+            System.out.println(); 
         } else {
-            System.out.println("[ Risultato del lancio del dado ] Al gladiatore \""+this.getNome()+"\" gli è uscito "+dato[0]+" e al gladiatore \""+nemico.getNome()+"\" gli è uscito "+dato[1]);
+            System.out.println("[ Risultato del lancio del dado ] Al tuo gladiatore \""+this.getNome()+"\" gli è uscito "+dato[0]+" e al gladiatore \""+nemico.getNome()+"\" gli è uscito "+dato[1]);
             danno = nemico.danno(this);
             this.setPuntiSalute(this.getPuntiSalute() - danno);
             int xp1=0;
@@ -195,10 +293,10 @@ public class Gladiatore{
                 xp1+=5+10;
             }
             nemico.setEsperienza(nemico.getEsperienza() + xp1);
+            System.out.println("Il gladiatore nemico \""+nemico.getNome()+"\" ha inflitto un danno [" + danno + "] al tuo gladiatore \""+this.getNome() + "\"");
             System.out.println("Il gladiatore \""+nemico.getNome()+"\" ha guadagnato "+nemico.getEsperienza() + "XP");
-            System.out.println("Il gladiatore nemico \""+nemico.getNome()+"\" ha inflitto un danno [" + danno + "] al gladiatore \""+this.getNome() + "\"");
-            System.out.println("La salute del gladiatore \""+this.getNome()+"\" è: "+this.getPuntiSalute());
-            System.out.println(); // Manca il controattacco del gladiatore
+            System.out.println("La salute del tuo gladiatore \""+this.getNome()+"\" è: "+this.getPuntiSalute() + "HP");
+            System.out.println();
         } // Manca la difesa da implementare
     }
     //Metodo danno, per calcolare il danno inflitto dal gladiatore

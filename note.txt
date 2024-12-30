@@ -3,6 +3,7 @@
 3. Poi una volta creato array di oggetti stamparli con un for. 
 4. Implementare la difesa e l'attacco speciale. 
 5. Implementare il livello in base agli xp.
+6. Migliorare la grafica
 Poi migliorare ulteriormente il codice. 
 
 Una volta finito la pogrammazione, modifcare il diagramma UML

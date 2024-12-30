@@ -20,18 +20,17 @@ public class Main{
         System.out.println(blue + "=====================================");
         System.out.println(" Benvenuto nel gioco dei Gladiatori!");
         System.out.println("=====================================\n" + reset);
-        /* Per favore non creare danni al codice, cerca di fare bene grazie */
-        String armamenti[] = {"Spada","Coltello"};
         System.out.println("Inserisci il nome: ");
         String nome = input.nextLine();
-        System.out.println("Inserisci il tipo: ");
-        String tipo = input.nextLine();
         System.out.println("Inserisci la provenienza: ");
         String provenienza = input.nextLine();
+        String armamenti[] = new String []{"pugnale","scudo"};
         //Il primo gladiatore
-        g[0] = new Gladiatore(nome, tipo, armamenti, provenienza);
+        g[0] = new Gladiatore(nome, armamenti, provenienza);
+        String tipo=g[0].personaggio();
+        g[0].setTipo(tipo);
         System.out.println("\nPrimo Gladiatore: \n" + g[0]);
-
+        
         armamenti = new String[]{"Lancia", "Scudo"};
         System.out.println("\nInserisci il nome: ");
         nome = input.nextLine();

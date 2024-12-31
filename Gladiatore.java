@@ -19,15 +19,17 @@ public class Gladiatore{
     private String provenienza;
     private int livello;
     //Costruttore Gladatore
-    public Gladiatore(String nome, String provenienza){
-        this.nome=nome;
+    public Gladiatore(){
+        this.nome="";
+        this.tipo="";
         this.esperienza=0;
         this.puntiSalute=random();
         this.attacco=random();
         this.difesa=random();
         this.velocità=random();
         this.attaccoSpeciale=random();
-        this.provenienza=provenienza;
+        this.armamenti=new String[DIM];
+        this.provenienza="";
         this.livello=1;
     }
     //Random numeri per le caratteristiche del gladiatore
@@ -116,10 +118,37 @@ public class Gladiatore{
     public void setLivello(int livello){
         this.livello=livello;
     }
+    //Colori per la stampa
     static final String red = "\u001B[31m";
     static final String green = "\u001B[32m";
     static final String blue = "\u001B[34m";
     static final String reset = "\u001B[0m";
+    //Creo oggetto scanner per leggere i dati in input
+    Scanner scan = new Scanner(System.in);
+    //Metodo per configurare il gladiatore utente
+    public void configGladiatore(Gladiatore oggetto){
+        System.out.println("Inserisci il nome del tuo Gladiatore: ");
+        oggetto.listaNome();
+        String nome = scan.nextLine();
+        oggetto.setNome(nome);
+        System.out.println("Inserisci la provenienza: ");
+        String provenienza = scan.nextLine();
+        oggetto.setProvenienza(provenienza);
+        String tipo=oggetto.configTipo();
+        oggetto.setTipo(tipo);
+        String armamenti[] = oggetto.configArmamenti();
+        oggetto.setArmamenti(armamenti);
+    }
+    //metodo per configurare gladiatore nemico
+    public void configGladiatoreNemico(Gladiatore oggetto, Gladiatore altroOggetto){
+        String nome = oggetto.configNome(altroOggetto);
+        oggetto.setNome(nome);
+        String tipo = oggetto.configAutoTipo();
+        oggetto.setTipo(tipo);
+        String armamenti[] = oggetto.configArmamenti();
+        oggetto.setArmamenti(armamenti);
+        oggetto.setProvenienza("Roma");
+    }
     //Metodo configTipo, per configurare il tipo del gladiatore
     public String configTipo(){
         System.out.println(blue + "Inserisci il tipo del Gladiatore: " + reset);
@@ -128,11 +157,10 @@ public class Gladiatore{
         System.out.println("3. Retiarius [una rete, un tridente, pugnale]");
         System.out.println("4. Secutor [scudo arotondato, pugnale]");
         System.out.println("5. Provocator [scudo rettangolare, pungale]");
-        Scanner dati = new Scanner(System.in);
         String personaggio;
         boolean risp = true;
         do{
-            personaggio = dati.nextLine();
+            personaggio = scan.nextLine();
             personaggio = personaggio.toLowerCase();
             
             switch(personaggio){
@@ -161,7 +189,7 @@ public class Gladiatore{
             }
             
         }while(risp);
-        dati.close();
+        scan.close();
         return personaggio;
     }
     //Metodo configAutoTipo, per configurare il tipo del gladiatore in modo automatico
@@ -257,6 +285,10 @@ public class Gladiatore{
         }while(nome.equals(nemico.getNome()));
         return nome;
     }
+    //Metodo per incrementare l'esperienza del gladiatore
+    public int calcolaEsperienza(float danno) {
+    return danno < 9 ? 10 : 15;
+}
     //Metodo combattimento
     public void combattimento(Gladiatore nemico){
         Random random = new Random();
@@ -264,34 +296,21 @@ public class Gladiatore{
         dato[0] = random.nextInt(20) + 1;
         dato[1] = random.nextInt(20) + 1;
         float danno;
+        System.out.println("[ Risultato del lancio del dado ] Al tuo gladiatore \""+this.getNome()+"\": "+dato[0]+". Al gladiatore \""+nemico.getNome()+"\": "+dato[1]);
         //float nuovaSalute;
         if(dato[0]>dato[1]){
-            System.out.println("[ Risultato del lancio del dado ] Al tuo gladiatore \""+this.getNome()+"\" gli è uscito "+dato[0]+" e al gladiatore \""+nemico.getNome()+"\" gli è uscito "+dato[1]);
             danno = this.danno(nemico);
             nemico.setPuntiSalute(nemico.getPuntiSalute() - danno);
-            int xp=0;
-            if(danno<9){
-                xp+=5;
-            }
-            else if(danno>=9){
-                xp+=5+10;
-            }
+            int xp = this.calcolaEsperienza(danno);
             this.setEsperienza(this.getEsperienza() + xp);
             System.out.println("Il tuo gladiatore \""+this.getNome()+"\" ha inflitto un danno [" + danno + "] al gladiatore \""+nemico.getNome()+ "\"");
             System.out.println("Il tuo gladiatore \""+this.getNome()+"\" ha guadagnato "+this.getEsperienza() + "XP");
             System.out.println("La salute del gladiatore nemico "+nemico.getNome()+" è: "+nemico.getPuntiSalute() + "HP");
             System.out.println(); 
         } else {
-            System.out.println("[ Risultato del lancio del dado ] Al tuo gladiatore \""+this.getNome()+"\" gli è uscito "+dato[0]+" e al gladiatore \""+nemico.getNome()+"\" gli è uscito "+dato[1]);
             danno = nemico.danno(this);
             this.setPuntiSalute(this.getPuntiSalute() - danno);
-            int xp1=0;
-            if(danno<9){
-                xp1+=5;
-                }
-            else if(danno>=9){
-                xp1+=5+10;
-            }
+            int xp1 = nemico.calcolaEsperienza(danno);
             nemico.setEsperienza(nemico.getEsperienza() + xp1);
             System.out.println("Il gladiatore nemico \""+nemico.getNome()+"\" ha inflitto un danno [" + danno + "] al tuo gladiatore \""+this.getNome() + "\"");
             System.out.println("Il gladiatore \""+nemico.getNome()+"\" ha guadagnato "+nemico.getEsperienza() + "XP");
@@ -310,4 +329,5 @@ public class Gladiatore{
         return danno;
     }
     //Implemntare altri metodi, continuare a migliorare i metodi già implementati
+
 }

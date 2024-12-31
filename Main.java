@@ -23,34 +23,14 @@ public class Main{
 
         System.out.println("Configurazione del tuo galadiatore...\n");
         //Il primo gladiatore
-        String nome = "";
-        String provenienza = "";
-        g[0] = new Gladiatore(nome, provenienza);
-        System.out.println("Inserisci il nome del tuo Gladiatore: ");
-        g[0].listaNome();
-        nome = input.nextLine();
-        g[0].setNome(nome);
-        System.out.println("Inserisci la provenienza: ");
-        provenienza = input.nextLine();
-        g[0].setProvenienza(provenienza);
-        String tipo=g[0].configTipo();
-        g[0].setTipo(tipo);
-        String armamenti[] = g[0].configArmamenti();
-        g[0].setArmamenti(armamenti);
+        g[0] = new Gladiatore();
+        g[0].configGladiatore(g[0]);
         System.out.println("\nPrimo Gladiatore>> \n" + g[0]);
         
         System.out.println("\nConfigurazione del secondo gladiatore...\n");
-        System.out.println("Inserisci la sua provenienza: ");
-        provenienza = input.nextLine();
         //Il secondo gladiatore
-        nome = "";
-        g[1] = new Gladiatore(nome, provenienza);
-        nome = g[1].configNome(g[0]);
-        g[1].setNome(nome);
-        tipo=g[1].configAutoTipo();
-        g[1].setTipo(tipo);
-        armamenti = g[1].configArmamenti();
-        g[1].setArmamenti(armamenti);
+        g[1] = new Gladiatore();
+        g[1].configGladiatoreNemico(g[1], g[0]);
         System.out.println("\nSecondo Gladiatore>> \n" + g[1]);
 
         System.out.println(blue + "\nVuoi iniziare la battaglia? (si/no)" + reset);
@@ -70,7 +50,7 @@ public class Main{
                     System.out.println(red + "Il tuo Gladiatore \"" + g[0].getNome() + "\" ha perso!" + reset); // Stampare gli HP rimasti, e stampare che l'altro gadiatore ha vinto
                     break;
                 } else if(g[1].getPuntiSalute() <= 0){
-                    System.out.println(green + "Il Gladiatore \"" + g[1].getNome() + "\" è morto!" + reset); // Stampare gli HP rimasti, e stampare che l'altro gladiatore ha vinto
+                    System.out.println(green + "Il Gladiatore \"" + g[1].getNome() + "\" è morto! Hai vinto!!" + reset); // Stampare gli HP rimasti, e stampare che l'altro gladiatore ha vinto
                     break;
                 }
 

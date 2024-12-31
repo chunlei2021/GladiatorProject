@@ -11,13 +11,15 @@ public class Main{
     static final String green = "\u001B[32m";
     static final String reset = "\u001B[0m";
     static final String blue = "\u001B[34m";
+    static final String bold = "\u001B[1m";
+    static final String underline = "\u001B[4m";
     
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         //Random random = new Random();
         Gladiatore g[] = new Gladiatore[2];
 
-        System.out.println(blue + "=====================================");
+        System.out.println(blue + bold + "=====================================");
         System.out.println(" Benvenuto nel gioco dei Gladiatori!");
         System.out.println("=====================================\n" + reset);
 
@@ -47,10 +49,10 @@ public class Main{
                 g[0].combattimento(g[1]);
 
                 if(g[0].getPuntiSalute() <= 0){
-                    System.out.println(red + "Il tuo Gladiatore \"" + g[0].getNome() + "\" ha perso!" + reset); // Stampare gli HP rimasti, e stampare che l'altro gadiatore ha vinto
+                    System.out.println(red + bold + "Il tuo Gladiatore \"" + g[0].getNome() + "\" ha perso!" + reset); // Stampare gli HP rimasti, e stampare che l'altro gadiatore ha vinto
                     break;
                 } else if(g[1].getPuntiSalute() <= 0){
-                    System.out.println(green + "Il Gladiatore \"" + g[1].getNome() + "\" è morto! Hai vinto!!" + reset); // Stampare gli HP rimasti, e stampare che l'altro gladiatore ha vinto
+                    System.out.println(green + bold + "Il Gladiatore \"" + g[1].getNome() + "\" è morto! Hai vinto!!" + reset); // Stampare gli HP rimasti, e stampare che l'altro gladiatore ha vinto
                     break;
                 }
 
@@ -63,9 +65,9 @@ public class Main{
                     System.out.println("Fine della battaglia!");
                     risp = false;
                     if(g[0].getPuntiSalute() > g[1].getPuntiSalute()){
-                        System.out.println(green + "Il tuo Gladiatore \"" + g[0].getNome() + "\" ha vinto la battaglia! (HP rimasti: " + g[0].getPuntiSalute() + ")" + reset);
+                        System.out.println(green + bold + "Il tuo Gladiatore \"" + g[0].getNome() + "\" ha vinto la battaglia! (HP rimasti: " + g[0].getPuntiSalute() + ")" + reset);
                     } else {
-                        System.out.println(red + "Il Gladiatore \"" + g[1].getNome() + "\" ha vinto la battaglia! (HP rimasti: " + g[1].getPuntiSalute() + ")" + reset);
+                        System.out.println(red + bold + "Il Gladiatore \"" + g[1].getNome() + "\" ha vinto la battaglia! (HP rimasti: " + g[1].getPuntiSalute() + ")" + reset);
                     } 
                 } else {
                     System.out.println(green + "Continua la battaglia!" + reset);

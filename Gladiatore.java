@@ -123,15 +123,17 @@ public class Gladiatore{
     static final String green = "\u001B[32m";
     static final String blue = "\u001B[34m";
     static final String reset = "\u001B[0m";
+    static final String bold = "\u001B[1m";
+    static final String underline = "\u001B[4m";
     //Creo oggetto scanner per leggere i dati in input
     Scanner scan = new Scanner(System.in);
     //Metodo per configurare il gladiatore utente
     public void configGladiatore(Gladiatore oggetto){
-        System.out.println("Inserisci il nome del tuo Gladiatore: ");
+        System.out.println(bold + "Inserisci il nome del tuo Gladiatore: " + reset);
         oggetto.listaNome();
         String nome = scan.nextLine();
         oggetto.setNome(nome);
-        System.out.println("Inserisci la provenienza: ");
+        System.out.println(bold + "Inserisci la provenienza: " + reset);
         String provenienza = scan.nextLine();
         oggetto.setProvenienza(provenienza);
         String tipo=oggetto.configTipo();
@@ -305,7 +307,7 @@ public class Gladiatore{
             this.setEsperienza(this.getEsperienza() + xp);
             System.out.println("Il tuo gladiatore \""+this.getNome()+"\" ha inflitto un danno [" + danno + "] al gladiatore \""+nemico.getNome()+ "\"");
             System.out.println("Il tuo gladiatore \""+this.getNome()+"\" ha guadagnato "+this.getEsperienza() + "XP");
-            System.out.println("La salute del gladiatore nemico "+nemico.getNome()+" è: "+nemico.getPuntiSalute() + "HP"); 
+            System.out.println(underline + "La salute del gladiatore nemico "+nemico.getNome()+" è: "+nemico.getPuntiSalute() + "HP" + reset); 
             System.out.println(); 
         } else {
             danno = nemico.danno(this);
@@ -314,7 +316,7 @@ public class Gladiatore{
             nemico.setEsperienza(nemico.getEsperienza() + xp1);
             System.out.println("Il gladiatore nemico \""+nemico.getNome()+"\" ha inflitto un danno [" + danno + "] al tuo gladiatore \""+this.getNome() + "\"");
             System.out.println("Il gladiatore \""+nemico.getNome()+"\" ha guadagnato "+nemico.getEsperienza() + "XP");
-            System.out.println("La salute del tuo gladiatore \""+this.getNome()+"\" è: "+this.getPuntiSalute() + "HP");
+            System.out.println(underline + "La salute del tuo gladiatore \""+this.getNome()+"\" è: "+this.getPuntiSalute() + "HP" + reset);
             System.out.println();
         } // Manca la difesa da implementare
     }

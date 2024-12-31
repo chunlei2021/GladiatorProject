@@ -71,8 +71,10 @@ public class Main{
                     System.out.println(green + "Continua la battaglia!" + reset);
                 }
             }
-            System.out.println("Il Gladiatore \"" + g[1].getNome() + "\" ha guadagnato " + g[1].getEsperienza() + " XP!");
-            System.out.println("Il tuo Gladiatore \"" + g[0].getNome() + "\" ha guadagnato " + g[0].getEsperienza() + " XP!");
+            g[0].incrementaLivello(g[0].getEsperienza());
+            g[1].incrementaLivello(g[1].getEsperienza());
+            System.out.println("Il Gladiatore \"" + g[1].getNome() + "\" ha guadagnato " + g[1].getEsperienza() + " XP! [Livello: " + g[1].getLivello() + "]");
+            System.out.println("Il tuo Gladiatore \"" + g[0].getNome() + "\" ha guadagnato " + g[0].getEsperienza() + " XP! [Livello: " + g[0].getLivello() + "]");
             //Continuare a scrivere il codice di questo blocco graffo per la battaglia
             System.out.println(blue + "\n--- FINE BATTAGLIA! ---" + reset);
     } else {

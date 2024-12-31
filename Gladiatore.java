@@ -305,7 +305,7 @@ public class Gladiatore{
             this.setEsperienza(this.getEsperienza() + xp);
             System.out.println("Il tuo gladiatore \""+this.getNome()+"\" ha inflitto un danno [" + danno + "] al gladiatore \""+nemico.getNome()+ "\"");
             System.out.println("Il tuo gladiatore \""+this.getNome()+"\" ha guadagnato "+this.getEsperienza() + "XP");
-            System.out.println("La salute del gladiatore nemico "+nemico.getNome()+" è: "+nemico.getPuntiSalute() + "HP");
+            System.out.println("La salute del gladiatore nemico "+nemico.getNome()+" è: "+nemico.getPuntiSalute() + "HP"); 
             System.out.println(); 
         } else {
             danno = nemico.danno(this);
@@ -329,5 +329,9 @@ public class Gladiatore{
         return danno;
     }
     //Implemntare altri metodi, continuare a migliorare i metodi già implementati
-
+    public int incrementaLivello(int xp){
+        int level = this.getEsperienza()/20;
+        this.setLivello(this.getLivello() + level);
+        return level;
+    }
 }

@@ -287,6 +287,14 @@ public class Gladiatore{
         }while(nome.equals(nemico.getNome()));
         return nome;
     }
+    //Metodo per output dei Gladiatori
+    public void listaGladiatori(Gladiatore g[]){
+        for(int i = 0; i < g.length; i++){
+            System.out.println((i++) + " Gladiatore >>");
+            System.out.println(g[i].toString());
+            System.out.println();
+        }
+    } //Implementarlo nel main
     //Metodo per incrementare l'esperienza del gladiatore
     public int calcolaEsperienza(float danno) {
     return danno < 9 ? 10 : 15;

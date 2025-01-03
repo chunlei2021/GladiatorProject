@@ -27,15 +27,17 @@ public class Main{
         //Il primo gladiatore
         g[0] = new Gladiatore();
         g[0].configGladiatore(g[0]);
-        System.out.println("\nPrimo Gladiatore>> \n" + g[0]);
+        System.out.println("\nPrimo Gladiatore >>");
+        System.out.println(g[0]);
         
-        System.out.println("\nConfigurazione del secondo gladiatore...\n");
+        System.out.println("\nConfigurazione del secondo gladiatore...");
         //Il secondo gladiatore
         g[1] = new Gladiatore();
         g[1].configGladiatoreNemico(g[1], g[0]);
-        System.out.println("\nSecondo Gladiatore>> \n" + g[1]);
+        System.out.println("Secondo Gladiatore >>");
+        System.out.println(g[1]);
 
-        System.out.println(blue + "\nVuoi iniziare la battaglia? (si/no)" + reset);
+        System.out.println(blue + "Vuoi iniziare la battaglia? (si/no)" + reset);
         String inizio = input.nextLine();
         inizio = inizio.toLowerCase();
         
@@ -54,6 +56,11 @@ public class Main{
                 } else if(g[1].getPuntiSalute() <= 0){
                     System.out.println(green + bold + "Il Gladiatore \"" + g[1].getNome() + "\" è morto! Hai vinto!!" + reset); // Stampare gli HP rimasti, e stampare che l'altro gladiatore ha vinto
                     break;
+                }
+                System.out.println("[Per vedere la lista dei gladiatori scrivere \"listagladiatori\"]");
+                risposta = input.nextLine(); risposta = risposta.toLowerCase();
+                if(risposta.equals("listagladiatori")){
+                    g[0].listaGladiatori(g);
                 }
 
                 System.out.println("Vuoi continuare la battaglia? (si/no)");
@@ -83,5 +90,6 @@ public class Main{
         System.out.println(red + "Fine del gioco!" + reset);
     }
     input.close();
+
     }
 }

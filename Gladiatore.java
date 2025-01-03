@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Gladiatore{
+    private String status;
     private String nome;
     private String tipo;
     private int esperienza;
@@ -20,6 +21,7 @@ public class Gladiatore{
     private int livello;
     //Costruttore Gladatore
     public Gladiatore(){
+        this.status = "Disponibile"; 
         this.nome="";
         this.tipo="";
         this.esperienza=0;
@@ -47,10 +49,26 @@ public class Gladiatore{
     }
     //Metodo toString, per stampare tutti gli attributi del gladiatore
     public String toString(){
-        return "Nome: "+nome+"\nTipo: "+tipo+"\nEsperienza: "+esperienza+" XP\nPunti Salute: "+puntiSalute+"HP \nAttacco: "+attacco+"\nDifesa: "+difesa+"\nVelocità: "+velocità+"\nAttacco Speciale: "+attaccoSpeciale+"\nArmamenti: "+Arrays.toString(armamenti)+"\nProvenienza: "+provenienza+"\nLivello: "+livello+"\nMedia: "+media()+"\nTotale: "+totale();
-        
+        String linea = "+----------------------+----------------------+----------------------+-------------------------------------+----------------------+----------------------+";
+        String tabella = "| %-20s | %-20s | %-20s | %-35s | %-20s | %-20s |%n";
+        System.out.println(linea);
+        System.out.print(bold);
+        System.out.printf(tabella, "Status", "Nome", "Tipo", "Esperienza", "Punti Salute", "Attacco");
+        System.out.print(reset);
+        System.out.printf(tabella, status, nome, tipo, esperienza, puntiSalute, attacco);
+        System.out.println(linea);
+        System.out.print(bold);
+        System.out.printf(tabella,  "Difesa", "Velocità", "Attacco Speciale", "Armamenti", "Provenienza ", "Livello");
+        System.out.print(reset);
+        System.out.printf(tabella, difesa, velocità, attaccoSpeciale, Arrays.toString(armamenti), provenienza, livello);
+        System.out.println(linea);
+        return "";
+        //return "Nome: "+nome+"\nTipo: "+tipo+"\nEsperienza: "+esperienza+" XP\nPunti Salute: "+puntiSalute+"HP \nAttacco: "+attacco+"\nDifesa: "+difesa+"\nVelocità: "+velocità+"\nAttacco Speciale: "+attaccoSpeciale+"\nArmamenti: "+Arrays.toString(armamenti)+"\nProvenienza: "+provenienza+"\nLivello: "+livello+"\nMedia: "+media()+"\nTotale: "+totale();
     }
     //Metodi getter
+    public String getStatus(){
+        return status;
+    }
     public String getNome(){
         return nome;
     }
@@ -85,6 +103,9 @@ public class Gladiatore{
         return livello;
     }
     //Metodi setter
+    public void setStatus(String status){
+        this.status=status;
+    }
     public void setNome(String nome){
         this.nome=nome;
     }
@@ -287,14 +308,18 @@ public class Gladiatore{
         }while(nome.equals(nemico.getNome()));
         return nome;
     }
-    //Metodo per output dei Gladiatori
+    //Il metodo per output dei gladiatori 
     public void listaGladiatori(Gladiatore g[]){
-        for(int i = 0; i < g.length; i++){
-            System.out.println((i++) + " Gladiatore >>");
-            System.out.println(g[i].toString());
+        for(int i = 0; i<g.length; i++){
+            String linea = "+----------------------+---------------------------------------------------------------------------------------------------------------------------------+";
+            String tabella = "| %-20s | %-20s   %-20s   %-35s   %-20s   %-20s |";
+            int temp = i;
+            System.out.println(linea);
+            System.out.println(String.format(tabella, "Gladiatore ", temp+1, "", "", "", ""));
+            System.out.print(g[i]);
             System.out.println();
         }
-    } //Implementarlo nel main
+    }
     //Metodo per incrementare l'esperienza del gladiatore
     public int calcolaEsperienza(float danno) {
     return danno < 9 ? 10 : 15;
@@ -343,5 +368,12 @@ public class Gladiatore{
         int level = this.getEsperienza()/20;
         this.setLivello(this.getLivello() + level);
         return level;
+    }
+    //Metodo per controllare lo status in base alla vita
+    //Serve anche per controllare qualli gladiatori sono disponibili o no
+    public void checkStatus(Gladiatore g){
+        if(this.getPuntiSalute() <= 0){
+            this.setStatus("Non Disponibile"); 
+        }        
     }
 }

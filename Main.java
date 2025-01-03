@@ -63,9 +63,8 @@ public class Main{
                     g[0].listaGladiatori(g);
                 }
 
-                System.out.println("Vuoi continuare la battaglia? (si/no)");
-                risposta = input.nextLine();
-                risposta = risposta.toLowerCase();
+                System.out.println("Vuoi continuare la battaglia? (si/no oppure premere \"Invio\")");
+                risposta = input.nextLine(); risposta = risposta.toLowerCase();
                 if(risposta.equals("si")){
                     System.out.println(green + "Si continua la battaglia!" + reset);
                 } else if(risposta.equals("no")){

@@ -174,46 +174,40 @@ public class Gladiatore{
     }
     //Metodo configTipo, per configurare il tipo del gladiatore
     public String configTipo(){
-        System.out.println(blue + "Inserisci il tipo del Gladiatore: " + reset);
+        System.out.println(blue + "Inserisci il tipo del Gladiatore [Inserisci un numero da 1 a 5]: " + reset);
         System.out.println("1. Traex [scudo piccolo, pugnale, lanci]");
         System.out.println("2. Murmillo [scudo romano, pugnale]");
         System.out.println("3. Retiarius [una rete, un tridente, pugnale]");
         System.out.println("4. Secutor [scudo arotondato, pugnale]");
         System.out.println("5. Provocator [scudo rettangolare, pungale]");
+        int num;
         String personaggio;
         boolean risp = true;
         do{
-            personaggio = scan.nextLine();
-            personaggio = personaggio.toLowerCase();
-            
-            switch(personaggio){
-                case "traex":
+            num = scan.nextInt();
+            switch(num){
+                case 1:
                     personaggio = "Traex";
                     return personaggio;
-
-                case "murmillo":
+                case 2:
                     personaggio = "Murmillo";
-                    return personaggio; 
-
-                case "retiarius":
+                    return personaggio;
+                case 3:
                     personaggio = "Retiarius";
-                    return personaggio;    
-
-                case "secutor":
+                    return personaggio;
+                case 4:
                     personaggio = "Secutor";
                     return personaggio;
-                
-                case "provocator":
+                case 5:
                     personaggio = "Provocator";
                     return personaggio;
-    
                 default:
                     System.out.println("Personaggio non trovato, reinseriscilo");        
             }
             
         }while(risp);
         scan.close();
-        return personaggio;
+        return "";
     }
     //Metodo configAutoTipo, per configurare il tipo del gladiatore in modo automatico
     public String configAutoTipo(){

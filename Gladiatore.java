@@ -263,20 +263,24 @@ public class Gladiatore{
     } 
     public void listaNome(){
         System.out.println("Lista dei nomi possibili: ");
-        System.out.println("1. Cicerone");
-        System.out.println("2. Seneca");
-        System.out.println("3. Marziale");
-        System.out.println("4. Valerio Massimo");
-        System.out.println("5. Spartaco");
-        System.out.println("6. Flamma");
-        System.out.println("7. Oppure inserire un altro nome");
+        String linea = "+----------------------+-------------------------------------+";
+        String tabella = "| %-20s | %-35s |%n";
+        System.out.println(linea);
+        System.out.printf(tabella, "1. Cicerone", "8. Narcisso");
+        System.out.printf(tabella, "2. Seneca", "9. Priscio");
+        System.out.printf(tabella, "3. Marziale", "10. Vero");
+        System.out.printf(tabella, "4. Valerio Massimo", "11. Carpoforo");
+        System.out.printf(tabella, "5. Spartaco", "12. Hilarius");
+        System.out.printf(tabella, "6. Flamma", "13. Amazon");
+        System.out.printf(tabella, "7. Marco Attilius", "14. Oppure inserire un altro nome");
+        System.out.println(linea);
     }
     //Metodo configurare il nome del gladiatore
     public String configNome(Gladiatore nemico){
         String nome;
         Random random = new Random();
         do{
-            int num = random.nextInt(4);
+            int num = random.nextInt(13);
             switch(num) {
                 case 0: 
                     nome = "Cicerone";
@@ -295,6 +299,27 @@ public class Gladiatore{
                     break;
                 case 5:
                     nome = "Flamma";
+                    break;
+                case 6:
+                    nome = "Marco Attilius";
+                    break;
+                case 7:
+                    nome = "Narcisso";
+                    break;
+                case 8:
+                    nome = "Priscio";
+                    break;
+                case 9:
+                    nome = "Vero";
+                    break;
+                case 10:
+                    nome = "Carpoforo";
+                    break;
+                case 11:
+                    nome = "Hilarius";
+                    break;
+                case 12:
+                    nome = "Amazon";
                     break;
                 default:
                     nome = "Nessun nome";

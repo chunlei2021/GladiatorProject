@@ -50,7 +50,8 @@ public class Gladiatore{
     //Metodo toString, per stampare tutti gli attributi del gladiatore
     public String toString(){
         String linea = "+----------------------+----------------------+----------------------+-------------------------------------+----------------------+----------------------+";
-        String tabella = "| %-20s | %-20s | %-20s | %-35s | %-20s | %-20s |%n";
+        String tabella = "| %-20s | %-20s | %-20s | %-32s XP | %-17s HP | %-20s |%n";
+        String tabella2 = "| %-20s | %-20s | %-20s | %-35s | %-20s | %-20s |%n";
         System.out.println(linea);
         System.out.print(bold);
         System.out.printf(tabella, "Status", "Nome", "Tipo", "Esperienza", "Punti Salute", "Attacco");
@@ -58,9 +59,9 @@ public class Gladiatore{
         System.out.printf(tabella, status, nome, tipo, esperienza, puntiSalute, attacco);
         System.out.println(linea);
         System.out.print(bold);
-        System.out.printf(tabella,  "Difesa", "Velocità", "Attacco Speciale", "Armamenti", "Provenienza ", "Livello");
+        System.out.printf(tabella2,  "Difesa", "Velocità", "Attacco Speciale", "Armamenti", "Provenienza ", "Livello");
         System.out.print(reset);
-        System.out.printf(tabella, difesa, velocità, attaccoSpeciale, Arrays.toString(armamenti), provenienza, livello);
+        System.out.printf(tabella2, difesa, velocità, attaccoSpeciale, Arrays.toString(armamenti), provenienza, livello);
         System.out.println(linea);
         return "";
         //return "Nome: "+nome+"\nTipo: "+tipo+"\nEsperienza: "+esperienza+" XP\nPunti Salute: "+puntiSalute+"HP \nAttacco: "+attacco+"\nDifesa: "+difesa+"\nVelocità: "+velocità+"\nAttacco Speciale: "+attaccoSpeciale+"\nArmamenti: "+Arrays.toString(armamenti)+"\nProvenienza: "+provenienza+"\nLivello: "+livello+"\nMedia: "+media()+"\nTotale: "+totale();

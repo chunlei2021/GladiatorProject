@@ -45,7 +45,7 @@ public class Main{
             
             System.out.println(blue + bold + "\n---- INIZIA LA BATTAGLIA! ----\n" + reset);
             //Inizio vero proprio della battaglia
-            String risposta = "si";
+            String risposta;
             boolean risp = true;
             while(risp){
                 g[0].combattimento(g[1]);

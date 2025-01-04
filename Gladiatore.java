@@ -393,9 +393,11 @@ public class Gladiatore{
     }
     //Metodo per controllare lo status in base alla vita
     //Serve anche per controllare qualli gladiatori sono disponibili o no
-    public void checkStatus(Gladiatore g){
-        if(this.getPuntiSalute() <= 0){
-            this.setStatus("Non Disponibile"); 
-        }        
+    public void checkStatus(Gladiatore g[]){
+        for(int i=0; i<g.length; i++){
+            if(g[i].getPuntiSalute() <= 0){
+                g[i].setStatus("Non Disponibile");
+            }
+        }       
     }
 }

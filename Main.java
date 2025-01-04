@@ -49,14 +49,12 @@ public class Main{
             boolean risp = true;
             while(risp){
                 g[0].combattimento(g[1]);
-
+                g[0].checkStatus(g); 
                 if(g[0].getPuntiSalute() <= 0){
                     System.out.println(red + bold + "Il tuo Gladiatore \"" + g[0].getNome() + "\" ha perso!" + reset); // Stampare gli HP rimasti, e stampare che l'altro gadiatore ha vinto
-                    g[0].checkStatus(g[0]);
                     break;
                 } else if(g[1].getPuntiSalute() <= 0){
                     System.out.println(green + bold + "Il Gladiatore \"" + g[1].getNome() + "\" è morto! Hai vinto!!" + reset); // Stampare gli HP rimasti, e stampare che l'altro gladiatore ha vinto
-                    g[1].checkStatus(g[1]);
                     break;
                 }
                 System.out.println("[Per vedere la lista dei gladiatori scrivere \"listagladiatori\"]");

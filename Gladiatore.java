@@ -322,8 +322,11 @@ public class Gladiatore{
     public void combattimento(Gladiatore nemico){
         Random random = new Random();
         int[] dato = new int[2];
-        dato[0] = random.nextInt(20) + 1;
-        dato[1] = random.nextInt(20) + 1;
+        do{
+            dato[0] = random.nextInt(20) + 1;
+            dato[1] = random.nextInt(20) + 1;
+        } while( dato[0] == dato[1]);
+        
         float danno;
         System.out.println("[ Risultato del lancio del dado ] Al tuo gladiatore \""+this.getNome()+"\": "+dato[0]+". Al gladiatore \""+nemico.getNome()+"\": "+dato[1]);
         //float nuovaSalute;

@@ -43,7 +43,7 @@ public class Main{
         
         if(inizio.equals("si")){
             
-            System.out.println(blue + "\n---- INIZIA LA BATTAGLIA! ----\n" + reset);
+            System.out.println(blue + bold + "\n---- INIZIA LA BATTAGLIA! ----\n" + reset);
             //Inizio vero proprio della battaglia
             String risposta = "si";
             boolean risp = true;
@@ -90,7 +90,7 @@ public class Main{
             g[0].listaGladiatori(g);
             System.out.println(blue + "\n---- FINE BATTAGLIA! ----" + reset);
     } else {
-        System.out.println(red + "Fine del gioco!" + reset);
+        System.out.println(red + bold + "Fine del gioco!" + reset);
     }
     input.close();
 

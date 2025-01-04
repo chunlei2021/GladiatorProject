@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Gladiatore{
+    private int id;
     private String status;
     private String nome;
     private String tipo;
@@ -21,6 +22,7 @@ public class Gladiatore{
     private int livello;
     //Costruttore Gladatore
     public Gladiatore(){
+        this.id = 0;
         this.status = "Disponibile"; 
         this.nome="";
         this.tipo="";
@@ -52,6 +54,9 @@ public class Gladiatore{
         String linea = "+----------------------+----------------------+----------------------+-------------------------------------+----------------------+----------------------+";
         String tabella = "| %-20s | %-20s | %-20s | %-32s XP | %-17s HP | %-20s |%n";
         String tabella2 = "| %-20s | %-20s | %-20s | %-35s | %-20s | %-20s |%n";
+        String tabella3 = "| %-20s | %-20s   %-20s   %-35s   %-20s   %-20s |%n";
+        System.out.println(linea);
+        System.out.printf(tabella3, "ID:", id, "", "", "", "");
         System.out.println(linea);
         System.out.print(bold);
         System.out.printf(tabella, "Status", "Nome", "Tipo", "Esperienza", "Punti Salute", "Attacco");
@@ -67,6 +72,9 @@ public class Gladiatore{
         //return "Nome: "+nome+"\nTipo: "+tipo+"\nEsperienza: "+esperienza+" XP\nPunti Salute: "+puntiSalute+"HP \nAttacco: "+attacco+"\nDifesa: "+difesa+"\nVelocità: "+velocità+"\nAttacco Speciale: "+attaccoSpeciale+"\nArmamenti: "+Arrays.toString(armamenti)+"\nProvenienza: "+provenienza+"\nLivello: "+livello+"\nMedia: "+media()+"\nTotale: "+totale();
     }
     //Metodi getter
+    public int getId(){
+        return id;
+    }
     public String getStatus(){
         return status;
     }
@@ -104,6 +112,9 @@ public class Gladiatore{
         return livello;
     }
     //Metodi setter
+    public void setId(int id){
+        this.id=id;
+    }
     public void setStatus(String status){
         this.status=status;
     }
@@ -207,7 +218,7 @@ public class Gladiatore{
             }
             
         }while(risp);
-        scan.close();
+        
         return "";
     }
     //Metodo configAutoTipo, per configurare il tipo del gladiatore in modo automatico
@@ -331,14 +342,57 @@ public class Gladiatore{
     //Il metodo per output dei gladiatori 
     public void listaGladiatori(Gladiatore g[]){
         for(int i = 0; i<g.length; i++){
-            String linea = "+----------------------+---------------------------------------------------------------------------------------------------------------------------------+";
-            String tabella = "| %-20s | %-20s   %-20s   %-35s   %-20s   %-20s |";
-            int temp = i;
-            System.out.println(linea);
-            System.out.println(String.format(tabella, "Gladiatore ", temp+1, "", "", "", ""));
             System.out.print(g[i]);
             System.out.println();
         }
+    }
+    //Metodo per stampre la lista del gladiatori più corta
+    public void listaGladiatoriCorto(Gladiatore g[]){
+        for(int i = 0; i<g.length; i++){
+            String linea = "+----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+";
+            String tabella = "| %-20s | %-20s | %-20s | %-20s | %-20s | %-20s |%n";
+            System.out.println(linea);
+            System.out.printf(tabella, "ID", "Nome", "Status", "Punti Salute", "Esperienza", "Livello");
+            System.out.println(linea);
+            System.out.printf(tabella, g[i].getId(), g[i].getNome(), g[i].getStatus(), g[i].getPuntiSalute(), g[i].getEsperienza(), g[i].getLivello());
+            System.out.println(linea);
+        }
+    }
+    //Metodo per scegliere quale gladiatore far combatere
+    public int scegliGladiatore(Gladiatore gUtente[]){
+        System.out.println("Scegli il gladiatore con cui vuoi combattere [Inserisci un numero id da 1 a 6]: ");
+        gUtente[0].listaGladiatori(gUtente);
+        int num;
+        boolean risp = true;
+        do{
+            num = scan.nextInt();
+            num--;
+            if(num >= 0 && num < 5){
+                if(gUtente[num].getStatus().equals("Disponibile")){
+                    return num;
+                } else {
+                    System.out.println("Il gladiatore non è disponibile, scegline un altro");
+                }
+            } else {
+                System.out.println("Numero non valido, reinseriscilo");
+            } //Da controllare e completare
+        }while(risp);
+        scan.close();
+        return 0;
+    }
+    //Metodo per far scegliere al nemico quale gladiatore far combattere
+    public int scegliGladiatoreNemico(Gladiatore gNemico[]){
+        Random random = new Random();
+        boolean risp = true;
+        do{
+            int num = random.nextInt(6);
+            if(gNemico[num].getStatus().equals("Disponibile")){
+                System.out.println("Il gladiatore nemico ha scelto il gladiatore con ID: "+num);
+                return num;
+            }
+        } while(risp);
+        
+        return 0;
     }
     //Metodo per incrementare l'esperienza del gladiatore
     public int calcolaEsperienza(float danno) {
@@ -362,7 +416,6 @@ public class Gladiatore{
             int xp = this.calcolaEsperienza(danno);
             this.setEsperienza(this.getEsperienza() + xp);
             System.out.println("Il tuo gladiatore \""+this.getNome()+"\" ha inflitto un danno [" + danno + "] al gladiatore \""+nemico.getNome()+ "\"");
-            System.out.println("Il tuo gladiatore \""+this.getNome()+"\" ha guadagnato "+this.getEsperienza() + "XP");
             System.out.println(underline + "La salute del gladiatore nemico "+nemico.getNome()+" è: "+nemico.getPuntiSalute() + "HP" + reset); 
             System.out.println(); 
         } else {
@@ -371,7 +424,6 @@ public class Gladiatore{
             int xp1 = nemico.calcolaEsperienza(danno);
             nemico.setEsperienza(nemico.getEsperienza() + xp1);
             System.out.println("Il gladiatore nemico \""+nemico.getNome()+"\" ha inflitto un danno [" + danno + "] al tuo gladiatore \""+this.getNome() + "\"");
-            System.out.println("Il gladiatore \""+nemico.getNome()+"\" ha guadagnato "+nemico.getEsperienza() + "XP");
             System.out.println(underline + "La salute del tuo gladiatore \""+this.getNome()+"\" è: "+this.getPuntiSalute() + "HP" + reset);
             System.out.println();
         } // Manca la difesa da implementare

@@ -1,5 +1,9 @@
 /*Progetto di fine anno sui Gladiatori
 [Realizzato da Camozzo e Petrini] 
+
+Il gioco dei Gladiatori è un gioco di combattimento a turni in cui il giocatore deve scegliere il proprio gladiatore e combattere contro i gladiatori nemici.
+Il gioco è composto da 12 gladiatori, 6 per il giocatore e 6 per il nemico. Ogni gladiatore ha delle caratteristiche come il nome, il livello, i punti salute, l'attacco, la difesa e l'attacco speciale.
+Il giocatore può scegliere il proprio gladiatore e combattere contro i gladiatori nemici. Il gioco termina quando il giocatore o i nemici non hanno più gladiatori disponibili.
 */
 import java.util.Scanner;
 //import java.util.Random;
@@ -32,7 +36,7 @@ public class Main{
             gUtente[i].setId(i);
             gUtente[i].configGladiatore(gUtente[i]);
         }
-        gUtente[0].listaGladiatori(gUtente);
+        gUtente[0].listaGladiatori(gUtente); //Stampa lista gladiatori
 
         //Configurazione dei gladiatori nemici
         for(int i = 0; i < gNemico.length; i++){
@@ -41,7 +45,18 @@ public class Main{
             gNemico[i].setId(i);
             gNemico[i].configGladiatoreNemico(gNemico[i], gUtente);
         }
-        gNemico[0].listaGladiatori(gNemico);
+        // Controllo se ci sono gladiatori con lo stesso nome
+        for (int i = 0; i < gNemico.length; i++) {
+            for (int j = i + 1; j < gNemico.length; j++) {
+            do {
+                if (gNemico[i].getNome().equals(gNemico[j].getNome())) {
+                String temp = gNemico[i].configNomeNemico(gNemico);
+                gNemico[i].setNome(temp);
+                }
+            } while (gNemico[i].getNome().equals(gNemico[j].getNome()));
+            }
+        }
+        gNemico[0].listaGladiatori(gNemico); //Stampa lista gladiatori nemici
 
         System.out.println(blue + "Vuoi iniziare la battaglia? (si/no)" + reset);
         String inizio = input.nextLine();
@@ -60,25 +75,24 @@ public class Main{
                 int cond1 = 0; int cond2 = 0;
                 while(risp){
                     //Inizio combattimento
-                    System.out.println("Stai combattendo con il Gladiatore ID \"" + gUtente[sceltaUtente].getId() + "\" contro il Gladiatore ID \"" + gNemico[sceltaNemico].getId() + "\"\n");
                     System.out.println(blue + bold + "\n---- " + gUtente[sceltaUtente].getNome() + " VS " + gNemico[sceltaNemico].getNome() + " ----\n" + reset);
                     gUtente[sceltaUtente].combattimento(gNemico[sceltaNemico]);
                     gUtente[0].checkStatus(gUtente);
                     gNemico[0].checkStatus(gNemico); 
-                    cond1 = gUtente[sceltaUtente].modificaCondizione(cond1);
+                    cond1 = gUtente[sceltaUtente].modificaCondizione(cond1); 
                     gUtente[sceltaUtente].rigeneraAttaccoSpeciale(cond1);
-                    cond2 = gNemico[sceltaNemico].modificaCondizione(cond2);
-                    gNemico[sceltaNemico].rigeneraAttaccoSpeciale(cond2); 
-                    //Controllo se uno dei due gladiatori ha perso
+                    cond2 = gNemico[sceltaNemico].modificaCondizione(cond2); 
+                    gNemico[sceltaNemico].rigeneraAttaccoSpeciale(cond2); //Rigenera attacco speciale
+                    //Controlla se uno dei due gladiatori ha perso
                     if(gUtente[sceltaUtente].getPuntiSalute() <= 0){
-                        System.out.println(red + bold + "Il tuo Gladiatore \"" + gUtente[sceltaUtente].getNome() + "\" ha perso! (HP rimasti a te: " + gUtente[sceltaUtente].getPuntiSalute() + ")" + reset); 
+                        System.out.println(red + bold + "Il tuo Gladiatore \"" + gUtente[sceltaUtente].getNome() + "\" ha perso! (HP rimasti a te: " + gUtente[sceltaUtente].getPuntiSalute() + ", XP: " + gUtente[sceltaUtente].getEsperienza() + ")" + reset);
                         break;
                     } else if(gNemico[sceltaNemico].getPuntiSalute() <= 0){
-                        System.out.println(green + bold + "Il Gladiatore \"" + gNemico[sceltaNemico].getNome() + "\" è morto! Hai vinto!! (HP rimasti a te: " + gUtente[sceltaUtente].getPuntiSalute() + ")" + reset); 
+                        System.out.println(green + bold + "Il Gladiatore \"" + gNemico[sceltaNemico].getNome() + "\" è morto! Hai vinto!! (HP rimasti a te: " + gUtente[sceltaUtente].getPuntiSalute() + ", XP: " + gUtente[sceltaUtente].getEsperienza() + ")" + reset);
                         break;
                     }
                     //Stampa lista gladiatori
-                    System.out.println("[Per vedere la lista corta dei gladiatori scrivere \"lista\", del nemico scrivere \"listanemico\"]");
+                    System.out.println("[Per vedere la lista corta dei gladiatori scrivere \"lista\", del nemico scrivere \"listanemico\", altrimenti premere \"Invio\"]");
                     risposta = input.nextLine(); risposta = risposta.toLowerCase();
                     if(risposta.equals("lista")){
                         gUtente[0].listaGladiatoriCorto(gUtente);
@@ -94,9 +108,9 @@ public class Main{
                         System.out.println("Fine del combattimento!");
                         risp = false;
                         if(gUtente[sceltaUtente].getPuntiSalute() > gNemico[sceltaNemico].getPuntiSalute()){
-                            System.out.println(green + bold + "Il tuo Gladiatore \"" + gUtente[sceltaUtente].getNome() + "\" ha vinto la battaglia! (HP rimasti: " + gUtente[sceltaUtente].getPuntiSalute() + ")" + reset);
+                            System.out.println(green + bold + "Il tuo Gladiatore \"" + gUtente[sceltaUtente].getNome() + "\" ha vinto la battaglia! (HP rimasti: " + gUtente[sceltaUtente].getPuntiSalute() + ", XP: " + gUtente[sceltaUtente].getEsperienza() + ")" + reset);
                         } else {
-                            System.out.println(red + bold + "Il Gladiatore \"" + gNemico[sceltaNemico].getNome() + "\" ha vinto la battaglia! (HP rimasti: " + gNemico[sceltaNemico].getPuntiSalute() + ")" + reset);
+                            System.out.println(red + bold + "Il Gladiatore \"" + gNemico[sceltaNemico].getNome() + "\" ha vinto la battaglia! (HP rimasti: " + gNemico[sceltaNemico].getPuntiSalute() + ", XP: " + gNemico[sceltaNemico].getEsperienza() + ")" + reset);
                         } 
                     } else {
                         System.out.println("+--------------------------------------------------------------------------------------------------------------------------------------------------------+");
@@ -129,8 +143,8 @@ public class Main{
                 
             }
             //Fine battaglia
-            int vivoUtenti = gUtente[0].checkDisponibilità(gUtente);
-            int vivoNemici = gNemico[0].checkDisponibilità(gNemico);
+            int vivoUtenti = gUtente[0].checkDisponibilità(gUtente); //Controlla quanti gladiatori sono rimasti
+            int vivoNemici = gNemico[0].checkDisponibilità(gNemico);//Controlla quanti gladiatori nemici sono rimasti
             //Stampa risultato battaglia
             if(vivoUtenti > vivoNemici){
                 System.out.println(green + bold + "Hai vinto la battaglia! Complimenti! [Gladiatori Rimasti: " + vivoUtenti + "]" + reset);
@@ -140,7 +154,7 @@ public class Main{
                 System.out.println(blue + bold + "Pareggio! Nessuno ha vinto!" + reset);
             }
             System.out.println("\nVuoi vedere la lista corta dei gladiatori? (si/no)");
-            if(input.nextLine().equals("si")){
+            if(input.nextLine().equals("si")){ //Stampa lista corta gladiatori
                 System.out.println("\nLa lista corta dei gladiatori fine battaglia: ");
                 gUtente[0].listaGladiatoriCorto(gUtente);
                 System.out.println("\nLa lista corta dei gladiatori nemici fine battaglia: ");

@@ -1,5 +1,9 @@
 /*Progetto di fine anno sui Gladiatori
 [Realizzato da Camozzo e Petrini] 
+
+Il gioco dei Gladiatori è un gioco di combattimento a turni in cui il giocatore deve scegliere il proprio gladiatore e combattere contro i gladiatori nemici.
+Il gioco è composto da 12 gladiatori, 6 per il giocatore e 6 per il nemico. Ogni gladiatore ha delle caratteristiche come il nome, il livello, i punti salute, l'attacco, la difesa e l'attacco speciale.
+Il giocatore può scegliere il proprio gladiatore e combattere contro i gladiatori nemici. Il gioco termina quando il giocatore o i nemici non hanno più gladiatori disponibili.
 */
 import java.util.Arrays;
 import java.util.Random;
@@ -164,7 +168,7 @@ public class Gladiatore{
     public void configGladiatore(Gladiatore oggetto){
         System.out.println(bold + "Inserisci il nome del tuo Gladiatore: " + reset);
         oggetto.listaNome();
-        String nome = scan.nextLine();
+        String nome = this.configNome();
         oggetto.setNome(nome);
         System.out.println(bold + "Inserisci la provenienza: " + reset);
         String provenienza = scan.nextLine();
@@ -176,7 +180,7 @@ public class Gladiatore{
     }
     //metodo per configurare gladiatore nemico
     public void configGladiatoreNemico(Gladiatore oggetto, Gladiatore g[]){
-        String nome = oggetto.configNome(g);
+        String nome = oggetto.configNomeNemico(g);
         oggetto.setNome(nome);
         String tipo = oggetto.configAutoTipo();
         oggetto.setTipo(tipo);
@@ -196,6 +200,10 @@ public class Gladiatore{
         String personaggio;
         boolean risp = true;
         do{
+            while (!scan.hasNextInt()) { //controllo se l'input è un numero
+                System.out.println("Input non valido. Inserisci un numero.");
+                scan.next();
+            }
             num = scan.nextInt();
             switch(num){
                 case 1:
@@ -287,8 +295,72 @@ public class Gladiatore{
         System.out.printf(tabella, "7. Marco Attilius", "14. Oppure inserire un altro nome");
         System.out.println(linea);
     }
-    //Metodo configurare il nome del gladiatore
-    public String configNome(Gladiatore g[]){
+    //Metodo per configurare il nome del gladiatore
+    public String configNome(){
+        String nome = "";
+        boolean name = false;
+        do{
+            name = false;
+            System.out.println("Inserisci il numero del nome del tuo Gladiatore: ");
+            while (!scan.hasNextInt()) { //Controlla se l'input è un numero
+            System.out.println("Input non valido. Inserisci un numero.");
+            scan.next();
+            }
+            int numero = scan.nextInt();
+            scan.nextLine();
+            switch(numero){
+                case 1:
+                    nome = "Cicerone";
+                    break;
+                case 2:
+                    nome = "Seneca";
+                    break;
+                case 3:
+                    nome = "Marziale";
+                    break;
+                case 4:
+                    nome = "Valerio Massimo";
+                    break;
+                case 5:
+                    nome = "Spartaco";
+                    break;
+                case 6:
+                    nome = "Flamma";
+                    break;
+                case 7:
+                    nome = "Marco Attilius";
+                    break;
+                case 8:
+                    nome = "Narcisso";
+                    break;
+                case 9:
+                    nome = "Priscio";
+                    break;
+                case 10:
+                    nome = "Vero";
+                    break;
+                case 11:
+                    nome = "Carpoforo";
+                    break;
+                case 12:
+                    nome = "Hilarius";
+                    break;
+                case 13:
+                    nome = "Amazon";
+                    break;
+                case 14:
+                    System.out.println("Inserisci un altro nome: ");
+                    nome = scan.nextLine();
+                    break;
+                default:
+                    System.out.println("Numero non valido, reinseriscilo");
+                    name = true;
+            }
+        }while(name);
+    return nome;
+    }
+    //Metodo configurare il nome del gladiatore Nemico
+    public String configNomeNemico(Gladiatore g[]){
         String nome;
         Random random = new Random();
         boolean name;
@@ -387,6 +459,10 @@ public class Gladiatore{
         gUtente[0].listaGladiatoriCorto(gUtente);
         int num;
         do{
+            while(!scan.hasNextInt()){
+                System.out.println("Inserisci un numero valido");
+                scan.next();
+            }
             num = scan.nextInt();
             if (num >= 0 && num <= 5) {
                 if (gUtente[num].getStatus().equals("Disponibile")) {
@@ -467,7 +543,7 @@ public class Gladiatore{
                 float dannoSpeciale;
                 if(this.attaccoSpeciale > 0){
                     dannoSpeciale = danno * 2f;
-                    System.out.println("Attaco Speciale attivato!!");
+                    System.out.println("Attacco Speciale attivato!!");
                     this.setAttaccoSpeciale(this.attaccoSpeciale - 1);
                     return dannoSpeciale;
                 } else {

@@ -57,6 +57,7 @@ public class Main{
                 //Inizio vero proprio della battaglia
                 String risposta;
                 boolean risp = true;
+                int cond1 = 0; int cond2 = 0;
                 while(risp){
                     //Inizio combattimento
                     System.out.println("Stai combattendo con il Gladiatore ID \"" + gUtente[sceltaUtente].getId() + "\" contro il Gladiatore ID \"" + gNemico[sceltaNemico].getId() + "\"\n");
@@ -64,6 +65,10 @@ public class Main{
                     gUtente[sceltaUtente].combattimento(gNemico[sceltaNemico]);
                     gUtente[0].checkStatus(gUtente);
                     gNemico[0].checkStatus(gNemico); 
+                    cond1 = gUtente[sceltaUtente].modificaCondizione(cond1);
+                    gUtente[sceltaUtente].rigeneraAttaccoSpeciale(cond1);
+                    cond2 = gNemico[sceltaNemico].modificaCondizione(cond2);
+                    gNemico[sceltaNemico].rigeneraAttaccoSpeciale(cond2); 
                     //Controllo se uno dei due gladiatori ha perso
                     if(gUtente[sceltaUtente].getPuntiSalute() <= 0){
                         System.out.println(red + bold + "Il tuo Gladiatore \"" + gUtente[sceltaUtente].getNome() + "\" ha perso! (HP rimasti a te: " + gUtente[sceltaUtente].getPuntiSalute() + ")" + reset); 
@@ -83,6 +88,7 @@ public class Main{
                     System.out.println("Vuoi continuare la battaglia? (si/no oppure premere \"Invio\")");
                     risposta = input.nextLine(); risposta = risposta.toLowerCase();
                     if(risposta.equals("si")){
+                        System.out.println("+--------------------------------------------------------------------------------------------------------------------------------------------------------+");
                         System.out.println(green + "Si continua la battaglia!" + reset);
                     } else if(risposta.equals("no")){
                         System.out.println("Fine del combattimento!");
@@ -93,6 +99,7 @@ public class Main{
                             System.out.println(red + bold + "Il Gladiatore \"" + gNemico[sceltaNemico].getNome() + "\" ha vinto la battaglia! (HP rimasti: " + gNemico[sceltaNemico].getPuntiSalute() + ")" + reset);
                         } 
                     } else {
+                        System.out.println("+--------------------------------------------------------------------------------------------------------------------------------------------------------+");
                         System.out.println(green + "Continua la battaglia!" + reset);
                     }
                 }
@@ -108,7 +115,7 @@ public class Main{
                     risp2 = false;
                 } else {
                     //controlla se ci sono gladiatori rimasti
-                    int check = gUtente[0].checkDisponibilità(gNemico);
+                    int check = gUtente[0].checkDisponibilità(gUtente);
                     if(check == 0){
                         System.out.println(red + bold + "Non ci sono più gladiatori rimasti! Fine del gioco!" + reset);
                         risp2 = false;
@@ -122,7 +129,7 @@ public class Main{
                 
             }
             //Fine battaglia
-            int vivoUtenti = gUtente[0].checkDisponibilità(gNemico);
+            int vivoUtenti = gUtente[0].checkDisponibilità(gUtente);
             int vivoNemici = gNemico[0].checkDisponibilità(gNemico);
             //Stampa risultato battaglia
             if(vivoUtenti > vivoNemici){

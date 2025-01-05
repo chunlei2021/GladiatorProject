@@ -447,8 +447,6 @@ public class Gladiatore{
             System.out.println(underline + "La salute del tuo gladiatore \""+this.getNome()+"\" è: "+this.getPuntiSalute() + "HP" + reset);
             System.out.println();
         }
-        this.rigeneraAttaccoSpeciale();
-        nemico.rigeneraAttaccoSpeciale();
     }
     //Metodo danno, per calcolare il danno inflitto dal gladiatore
     public float danno(Gladiatore nemico){
@@ -480,12 +478,18 @@ public class Gladiatore{
         }
         return danno;
     }
+    //Un metodo che modifica la condizione
+    public int modificaCondizione(int condizione){
+        int cond = condizione;
+        if(this.esperienza >= cond){
+            cond += 50;
+        }
+        return cond;
+    }
     //Metodo per rigenerare l'attacco speciale
-    public void rigeneraAttaccoSpeciale(){
-        for(int i=50; i<this.esperienza; i+=100){
-            if(this.esperienza >= i){
-                this.setAttaccoSpeciale(this.attaccoSpeciale + 1);
-            }
+    public void rigeneraAttaccoSpeciale(int condizione){
+        if(this.esperienza >= condizione){
+            this.setAttaccoSpeciale(this.attaccoSpeciale + 1);
         }
     }
     //Metodo per far scegliere al galdiatore nemico se usare l'attacco speciale
@@ -494,9 +498,6 @@ public class Gladiatore{
         int num = random.nextInt(5);
         if(num == 1){
             float dannoSpeciale;
-            if(this.getEsperienza() >= 50){
-                this.setAttaccoSpeciale(this.attaccoSpeciale + 1);
-            }
             if(this.attaccoSpeciale > 0){
                 dannoSpeciale = danno * 2f;
                 System.out.println("Attaco Speciale del nemico attivato!!");

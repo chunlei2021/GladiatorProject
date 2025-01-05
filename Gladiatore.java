@@ -31,7 +31,7 @@ public class Gladiatore{
         this.attacco=random();
         this.difesa=random();
         this.velocità=random();
-        this.attaccoSpeciale=random();
+        this.attaccoSpeciale=1;
         this.armamenti=new String[DIM];
         this.provenienza="";
         this.livello=1;
@@ -175,8 +175,8 @@ public class Gladiatore{
         oggetto.setArmamenti(armamenti);
     }
     //metodo per configurare gladiatore nemico
-    public void configGladiatoreNemico(Gladiatore oggetto, Gladiatore altroOggetto){
-        String nome = oggetto.configNome(altroOggetto);
+    public void configGladiatoreNemico(Gladiatore oggetto, Gladiatore g[]){
+        String nome = oggetto.configNome(g);
         oggetto.setNome(nome);
         String tipo = oggetto.configAutoTipo();
         oggetto.setTipo(tipo);
@@ -288,10 +288,12 @@ public class Gladiatore{
         System.out.println(linea);
     }
     //Metodo configurare il nome del gladiatore
-    public String configNome(Gladiatore nemico){
+    public String configNome(Gladiatore g[]){
         String nome;
         Random random = new Random();
+        boolean name;
         do{
+            name = false;
             int num = random.nextInt(13);
             switch(num) {
                 case 0: 
@@ -336,7 +338,14 @@ public class Gladiatore{
                 default:
                     nome = "Nessun nome";
             }
-        }while(nome.equals(nemico.getNome()));
+            for(int i = 0; i<g.length; i++){
+                if(nome.equals(g[i].getNome())){
+                    name = true;
+                }
+            }
+
+        }while(name);
+
         return nome;
     }
     //Il metodo per output dei gladiatori 
@@ -349,50 +358,59 @@ public class Gladiatore{
     //Metodo per stampre la lista del gladiatori più corta
     public void listaGladiatoriCorto(Gladiatore g[]){
         for(int i = 0; i<g.length; i++){
-            String linea = "+----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+";
-            String tabella = "| %-20s | %-20s | %-20s | %-20s | %-20s | %-20s |%n";
-            System.out.println(linea);
-            System.out.printf(tabella, "ID", "Nome", "Status", "Punti Salute", "Esperienza", "Livello");
-            System.out.println(linea);
-            System.out.printf(tabella, g[i].getId(), g[i].getNome(), g[i].getStatus(), g[i].getPuntiSalute(), g[i].getEsperienza(), g[i].getLivello());
-            System.out.println(linea);
+            if(g[i].getPuntiSalute() > 0){
+                String linea = "+----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+";
+                String tabella = "| %-20s | %-20s | %-20s | %-20s | %-20s | %-20s |%n";
+                System.out.println(linea);
+                System.out.print(bold);
+                System.out.printf(tabella, "ID", "Nome", "Status", "Punti Salute", "Esperienza", "Livello");
+                System.out.print(reset);
+                System.out.println(linea);
+                System.out.printf(tabella, g[i].getId(), g[i].getNome(), g[i].getStatus(), g[i].getPuntiSalute(), g[i].getEsperienza(), g[i].getLivello());
+                System.out.println(linea);
+            } else {
+                System.out.print(red);
+                String linea = "+----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+";
+                String tabella = "| %-20s | %-20s | %-20s | %-20s | %-20s | %-20s |%n";
+                System.out.println(linea);
+                System.out.printf(tabella, "ID", "Nome", "Status", "Punti Salute", "Esperienza", "Livello");
+                System.out.println(linea);
+                System.out.printf(tabella, g[i].getId(), g[i].getNome(), g[i].getStatus(), g[i].getPuntiSalute(), g[i].getEsperienza(), g[i].getLivello());
+                System.out.println(linea);
+                System.out.print(reset);
+            }
         }
     }
     //Metodo per scegliere quale gladiatore far combatere
     public int scegliGladiatore(Gladiatore gUtente[]){
-        System.out.println("Scegli il gladiatore con cui vuoi combattere [Inserisci un numero id da 1 a 6]: ");
-        gUtente[0].listaGladiatori(gUtente);
+        System.out.println("Scegli il gladiatore con cui vuoi combattere [Inserisci un numero id da 0 a 5]: ");
+        gUtente[0].listaGladiatoriCorto(gUtente);
         int num;
-        boolean risp = true;
         do{
             num = scan.nextInt();
-            num--;
-            if(num >= 0 && num < 5){
-                if(gUtente[num].getStatus().equals("Disponibile")){
+            if (num >= 0 && num <= 5) {
+                if (gUtente[num].getStatus().equals("Disponibile")) {
                     return num;
                 } else {
                     System.out.println("Il gladiatore non è disponibile, scegline un altro");
                 }
             } else {
                 System.out.println("Numero non valido, reinseriscilo");
-            } //Da controllare e completare
-        }while(risp);
-        scan.close();
-        return 0;
+            }
+        }while(true);
     }
+    
     //Metodo per far scegliere al nemico quale gladiatore far combattere
     public int scegliGladiatoreNemico(Gladiatore gNemico[]){
         Random random = new Random();
-        boolean risp = true;
         do{
             int num = random.nextInt(6);
-            if(gNemico[num].getStatus().equals("Disponibile")){
-                System.out.println("Il gladiatore nemico ha scelto il gladiatore con ID: "+num);
+            if(gNemico[num].getStatus().equals("Disponibile") && gNemico[num].getPuntiSalute() > 0){
+                System.out.println("Il gladiatore nemico ha scelto il gladiatore con ID: "+ num);
                 return num;
             }
-        } while(risp);
+        } while(true);
         
-        return 0;
     }
     //Metodo per incrementare l'esperienza del gladiatore
     public int calcolaEsperienza(float danno) {
@@ -412,21 +430,23 @@ public class Gladiatore{
         //float nuovaSalute;
         if(dato[0]>dato[1]){
             danno = this.danno(nemico);
+            danno = this.calcolaAttacoSpeciale(danno);
             nemico.setPuntiSalute(nemico.getPuntiSalute() - danno);
             int xp = this.calcolaEsperienza(danno);
             this.setEsperienza(this.getEsperienza() + xp);
             System.out.println("Il tuo gladiatore \""+this.getNome()+"\" ha inflitto un danno [" + danno + "] al gladiatore \""+nemico.getNome()+ "\"");
             System.out.println(underline + "La salute del gladiatore nemico "+nemico.getNome()+" è: "+nemico.getPuntiSalute() + "HP" + reset); 
-            System.out.println(); 
+            System.out.println();   
         } else {
             danno = nemico.danno(this);
+            danno = nemico.calcolaAttacoSpecialeNemico(danno);
             this.setPuntiSalute(this.getPuntiSalute() - danno);
             int xp1 = nemico.calcolaEsperienza(danno);
             nemico.setEsperienza(nemico.getEsperienza() + xp1);
             System.out.println("Il gladiatore nemico \""+nemico.getNome()+"\" ha inflitto un danno [" + danno + "] al tuo gladiatore \""+this.getNome() + "\"");
             System.out.println(underline + "La salute del tuo gladiatore \""+this.getNome()+"\" è: "+this.getPuntiSalute() + "HP" + reset);
             System.out.println();
-        } // Manca la difesa da implementare
+        }
     }
     //Metodo danno, per calcolare il danno inflitto dal gladiatore
     public float danno(Gladiatore nemico){
@@ -438,19 +458,69 @@ public class Gladiatore{
         danno *= rand;
         return danno;
     }
+    //Metodo per l'attaco speciale
+    public float calcolaAttacoSpeciale(float danno){
+        System.out.println("Vuoi usare l'attacco speciale? (si/no)");
+        String risposta = scan.nextLine(); risposta = risposta.toLowerCase();
+        if(risposta.equals("si")){
+            float dannoSpeciale;
+            if(this.getEsperienza() >= 50){
+                this.setAttaccoSpeciale(this.attaccoSpeciale + 1);
+            }
+            if(this.attaccoSpeciale > 0){
+                dannoSpeciale = danno * 2f;
+                System.out.println("Attaco Speciale attivato!!");
+                this.setAttaccoSpeciale(this.attaccoSpeciale - 1);
+                return dannoSpeciale;
+            } else {
+                System.out.println("Hai terminato gli attacchi speciali");
+                return danno;
+            }
+        }
+        return danno;
+    }
+    //Metodo per far scegliere al galdiatore nemico se usare l'attacco speciale
+    public float calcolaAttacoSpecialeNemico(float danno){
+        Random random = new Random();
+        int num = random.nextInt(5);
+        if(num == 1){
+            float dannoSpeciale;
+            if(this.getEsperienza() >= 50){
+                this.setAttaccoSpeciale(this.attaccoSpeciale + 1);
+            }
+            if(this.attaccoSpeciale > 0){
+                dannoSpeciale = danno * 2f;
+                System.out.println("Attaco Speciale del nemico attivato!!");
+                this.setAttaccoSpeciale(this.attaccoSpeciale - 1);
+                return dannoSpeciale;
+            } else {
+                return danno;
+            }
+        }
+        return danno;
+    }
     //Implemntare altri metodi, continuare a migliorare i metodi già implementati
     public int incrementaLivello(int xp){
-        int level = this.getEsperienza()/20;
-        this.setLivello(this.getLivello() + level);
+        int level = this.esperienza/20;
+        this.setLivello(this.livello + level);
         return level;
     }
     //Metodo per controllare lo status in base alla vita
-    //Serve anche per controllare qualli gladiatori sono disponibili o no
     public void checkStatus(Gladiatore g[]){
         for(int i=0; i<g.length; i++){
             if(g[i].getPuntiSalute() <= 0){
                 g[i].setStatus("Non Disponibile");
             }
         }       
+    }
+    //Metodo per controllare se ci sono gladiatori disponibili
+    public int checkDisponibilità(Gladiatore g[]){
+        int check = 0;
+        for(int i = 0; i < g.length; i++){
+            if(g[i].getPuntiSalute() > 0 && g[i].getStatus().equals("Disponibile")){
+                check++;
+            }
+        }
+        return check;
     }
 }

@@ -1,10 +1,10 @@
 1. Bisogna automizzare la generazione del gladiatore nemico, cioè i nomi, la provenienza... devono essere generati automaticamente. (Fatto)
 2. Permettere all'utente di scegliere gli armamenti e il tipo. (Fatto)
 3. Poi una volta creato array di oggetti stamparli con un for. (Fatto)
-4. Implementare l'attacco speciale. 
+4. Implementare l'attacco speciale. (Fatto)
 5. Implementare il livello in base agli xp. (fatto)
 6. Migliorare la grafica (Fatto)
-7. Creare una partita con sei gladiatori dell'utente e sei del computer.
-Poi migliorare ulteriormente il codice. 
+7. Creare una partita con sei gladiatori dell'utente e sei del computer. (Fatto)
+Poi migliorare ulteriormente il codice. (Fatto)
 
 Una volta finito la pogrammazione, modifcare il diagramma UML

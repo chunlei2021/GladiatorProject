@@ -537,7 +537,7 @@ public class Gladiatore{
     //Metodo per l'attaco speciale
     public float calcolaAttacoSpeciale(float danno){
         if(this.attaccoSpeciale > 0){
-            System.out.println("Vuoi usare l'attacco speciale? (si/no)");
+            System.out.println("Vuoi usare l'attacco speciale? (si/no) [Al primo attacco non si può utilizzarlo]");
             String risposta = scan.nextLine(); risposta = risposta.toLowerCase();
             if(risposta.equals("si")){
                 float dannoSpeciale;

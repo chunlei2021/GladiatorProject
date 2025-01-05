@@ -482,8 +482,10 @@ public class Gladiatore{
     }
     //Metodo per rigenerare l'attacco speciale
     public void rigeneraAttaccoSpeciale(){
-        if(this.esperienza >= 50){
-            this.setAttaccoSpeciale(this.attaccoSpeciale + 1);
+        for(int i=50; i<this.esperienza; i+=100){
+            if(this.esperienza >= i){
+                this.setAttaccoSpeciale(this.attaccoSpeciale + 1);
+            }
         }
     }
     //Metodo per far scegliere al galdiatore nemico se usare l'attacco speciale

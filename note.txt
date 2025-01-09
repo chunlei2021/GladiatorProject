@@ -7,4 +7,4 @@
 7. Creare una partita con sei gladiatori dell'utente e sei del computer. (Fatto)
 Poi migliorare ulteriormente il codice. (Fatto)
 
-Una volta finito la pogrammazione, modifcare il diagramma UML
+Una volta finito la pogrammazione, modifcare il diagramma UML (Da finire)
